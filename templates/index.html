@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/css/materialize.min.css">
+  <link rel="stylesheet" href="../static/css/style.css"/>
+<title>Bestsellers Library Nook</title>
+
+</head>
+
+<body class="#212121 grey darken-4">
+
+	<!-- backgound image -->
+	<style>
+		body {
+		  background-image: url('../books.jpeg');
+		}
+		</style>
+
+<!-- Title?  -->
+<div class="container">
+    
+    <div class="row">
+      <div class="col-md-12 jumbotron text-center">
+		<style>
+			.row {
+				background-color: #EBEBEB;
+			}
+		</style>
+		<h1>Welcome to our library!</h1>	
+		<p>Amazons 50 bestsellers per year for 2009-2019</p>
+
+      </div>
+	</div>
+</div>
+
+	<!-- navigation bar. Need to update links -->
+	<div class="container">
+        <strong><nav>
+          <ul class="menu">
+            <li><a href="{{ url_for('home') }}">Home</a></li>
+			<li><a href="{{ url_for('Visualizations') }}">Visualizations</a></li>
+			<li><a href="{{ url_for('Analysis') }}">Analysis</a></li>
+          </ul>
+        </nav></strong>
+      </div>
+
+<!-- div for 2009-2019 visualization -->
+	</br>
+	</br>
+	<div class="row">
+		<div class="col-xs-12  col-md-9">
+		<div id="scatter">
+			<!-- Scatter plot here. -->
+		</div>
+		</div>
+
+
+
+<!-- API request for additional book information -->
+	<div id="search" class="#f5f5f5 grey lighten-4 z-depth-5">
+		<form id="myform">
+			<div class="input-field">
+				<input type="search" id="books">
+				<label for="search">Search Books</label>
+			</div>
+			<button class="btn red">Search Books</button>
+		</form>
+	</div>
+	<div id="result">
+		
+	</div>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/js/materialize.min.js"></script>
+	<script src="../searchtool.js"></script>
+
+<!-- new -->
+	<script src="https://d3js.org/d3.v6.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/d3-tip/0.9.1/d3-tip.js"></script>
+  	<script type="text/javascript" src="../app.js"></script> 
+
+
+ <!-- Footer-->
+ <div id="footer">
+    <p>Hoped you enjoyed your stay. Now get reading!</p>
+  </div>
+
+
+</body>
+
+</html>
