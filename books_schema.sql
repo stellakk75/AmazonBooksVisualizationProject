@@ -9,8 +9,8 @@ author_id INTEGER REFERENCES authors(author_id));
 CREATE TABLE books_details(
 book_id	INTEGER REFERENCES books(book_id),
 reviews INTEGER,
-ratings	NUMERIC,
+rating	NUMERIC,
 price		NUMERIC,
-year	date,
+year	INTEGER,
 genre			VARCHAR(50)	
 );
