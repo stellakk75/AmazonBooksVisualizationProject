@@ -100,7 +100,7 @@ function updateToolTip(chosenYAxis, circleGroup) {
 let parseTime = d3.timeParse('%Y')
 
 // Import data
-d3.csv("../new_books.csv").then(function(data, err){
+d3.csv("../RawData/new_books.csv").then(function(data, err){
   // console.log(data)
   if (err) throw err;
 
