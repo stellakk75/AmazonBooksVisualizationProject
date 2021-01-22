@@ -19,25 +19,24 @@ var svg = d3
   .attr("width", svgWidth)
   .attr("height", svgHeight)
 
-// Append an SVG group
+// Append an SVG group with margins 
 var chartGroup = svg.append("g")
   .attr("transform", `translate(${margin.left}, ${margin.top})`);
 
 //initial parameters
-let chosenYAxis = "Price"
+let chosenYAxis = "Price";
 
 
-//function to update y-scale var when clicked on
+// Updates y-scale var based on y-axis label 
 function yScale(data, chosenYAxis) {
   
   // create scales
-
   let yLinearScale = d3.scaleLinear()
-  .domain([0,d3.max(data, d=>d[chosenYAxis])])
+    .domain([d3.min(data, d=> d[chosenYAxis]),d3.max(data, d=>d[chosenYAxis])
+            ])
   .range([height,0])
     
   return yLinearScale;
-
 }
 
 
@@ -52,40 +51,39 @@ function renderAxes(newYScale, yAxis) {
   return yAxis;
 }
 
-// function used for updating circles group with a transition to
-// new circles
-function renderCircles(circlesGroup, newYScale, chosenYAxis) {
+// function used for updating circles group 
+function renderCircles(circleGroup, newYScale, chosenYAxis) {
 
-  circlesGroup.transition()
+  circleGroup.transition()
     .duration(1000)
     .attr("cy", d => newYScale(d[chosenYAxis]));
 
-  return circlesGroup;
+  return circleGroup;
 }
 
 
 // function used for updating circles group with new tooltip
-function updateToolTip(chosenYAxis, circlesGroup) {
+function updateToolTip(chosenYAxis, circleGroup) {
 
-  var label;
+  let label;
 
   if (chosenYAxis === "Price") {
-    label = "Price:";
+    label = "Price";
   }
   else {
-    label = "Reviews";
+    label = "Rating";
   }
 
   var toolTip = d3.tip()
     .attr("class", "tooltip")
     .offset([80, -60])
     .html(function(d) {
-      return (`${d.Price}<br>${label} ${d[chosenYAxis]}`);
+      return (`${d.Name}<br>${label} ${d[chosenYAxis]}`);
     });
 
-  circlesGroup.call(toolTip);
+  circleGroup.call(toolTip);
 
-  circlesGroup.on("mouseover", function(data) {
+  circleGroup.on("mouseover", function(data) {
     toolTip.show(data);
   })
     // onmouseout event
@@ -93,7 +91,7 @@ function updateToolTip(chosenYAxis, circlesGroup) {
       toolTip.hide(data);
     });
 
-  return circlesGroup;
+  return circleGroup;
 }
 
 
@@ -102,24 +100,27 @@ function updateToolTip(chosenYAxis, circlesGroup) {
 let parseTime = d3.timeParse('%Y')
 
 // Import data
-d3.csv("../bestsellers.csv").then(function(data){
+d3.csv("../new_books.csv").then(function(data, err){
   // console.log(data)
+  if (err) throw err;
 
   // parse out data
   data.forEach(item =>{
-    item.Year = parseTime(item.Year);
+    item.Year = +parseTime(item.Year);
     item.Price = +item.Price;
-    item.Reviews = +item.Reviews;
+    item.Rating = +item.Rating;
   })
 
-  // Create scale function
+  // Create x scale function for time 
   let xScale = d3.scaleTime()
   .domain(d3.extent(data, d=>d.Year))
   .range([0,width])
 
+  // Create y scale function calling yScale function
   let yLinearScale = yScale(data, chosenYAxis)
 
-  //create initial axis functions
+
+  // Create initial axis functions
   let bottomAxis = d3.axisBottom(xScale)
   let leftAxis = d3.axisLeft(yLinearScale)
 
@@ -129,34 +130,20 @@ d3.csv("../bestsellers.csv").then(function(data){
   let yAxis = chartGroup.append('g').classed("y-axis", true).call(leftAxis)
 
 
-//create circles
-let circleGroup = chartGroup.selectAll('circle')
-.data(data)
-.enter()
-.append('circle')
-.attr('cx',d=>xScale(d.Year))
-.attr('cy',d=>yLinearScale(d[chosenYAxis]))
-.attr('r','15')
-.attr('opacity','.8')
-.attr('fill', 'steelblue')
+  //create intial circles
+  let circleGroup = chartGroup.selectAll('circle')
+  .data(data)
+  .enter()
+  .append('circle')
+  .attr('cx',d=>xScale(d.Year))
+  .attr('cy',d=>yLinearScale(d[chosenYAxis]))
+  .attr('r','5')
+  .attr('opacity','.8')
+  .attr('fill', 'steelblue')
 
-// //create labels of state abbr within circle 
-// chartGroup.append("g")
-//   .selectAll("text")
-//   .data(data)
-//   .enter()
-//   .append("text")
-//   .text(d=>d.abbr)
-//   .attr("x",d=>xLinearScale(d.poverty))
-//   .attr("y",d=>yLinearScale(d.healthcare))
-//   .attr('font-size','10')
-//   .attr('fill','white')
-//   .attr("text-anchor", "middle")
-//   .attr('font-weight',1000)
 
-// group for 2 y-axis labels
+// group for two y-axis labels
 let labelGroup = chartGroup.append('g')
-.attr("transform", `translate(${width / 2}, ${height + 20})`);
 
 
 // Create axes labels
@@ -168,32 +155,38 @@ let priceLabel = chartGroup.append("text")
   .attr("class", "axisText")  
   .attr("value","Price")
   .classed("active",true)
-  .text("Book Prices");
+  .text("Price");
 
-let reviewLabel = chartGroup.append("text")
+let ratingLabel = chartGroup.append("text")
   .attr("transform", "rotate(-90)")
   .attr("y", 0 - margin.left + 20)
   .attr("x", 0 - (height / 1.5))
   .attr("dy", "1em")
   .attr("class", "axisText")  
-  .attr("value","Reviews")
+  .attr("value","Rating")
   .classed("inactive",true)
-  .text("Reviews");
+  .text("Rating");
 
+  //append x axis 
 chartGroup.append("text")
   .attr("transform", `translate(${width / 2}, ${height + margin.top + 30})`)
   .attr("class", "axisText")
+  .classed("axis-text", true)
   .text("Years");
 
 
+// giving error since circleGroup is already defined 
+  // var circleGroup = updateToolTip(chosenYAxis, circleGroup);
 
-//y axis labels event listener
 
-
+// y axis labels event listener
   labelGroup.selectAll("text")
     .on("click", function() {
       // get value of selection
       var value = d3.select(this).attr("value");
+      console.log(value)
+
+
       if (value !== chosenYAxis) {
 
         // replaces chosenYAxis with value
@@ -205,18 +198,18 @@ chartGroup.append("text")
         // updates x scale for new data
         yLinearScale = yScale(data, chosenYAxis);
 
-        // updates x axis with transition
+        // updates y axis with transition
         yAxis = renderAxes(yLinearScale, yAxis);
 
-        // updates circles with new x values
-        circlesGroup = renderCircles(circlesGroup, yLinearScale, chosenYAxis);
+        // updates circles with new y values
+        circleGroup = renderCircles(circleGroup, yLinearScale, chosenYAxis);
 
         // updates tooltips with new info
-        circlesGroup = updateToolTip(chosenYAxis, circlesGroup);
+        circleGroup = updateToolTip(chosenYAxis, circleGroup);
 
         // changes classes to change bold text
-        if (chosenYAxis === "Reviews") {
-          reviewLabel
+        if (chosenYAxis === "Rating") {
+          ratingLabel
             .classed("active", true)
             .classed("inactive", false);
           priceLabel
@@ -224,7 +217,7 @@ chartGroup.append("text")
             .classed("inactive", true);
         }
         else {
-          reviewLabel
+          ratingLabel
             .classed("active", false)
             .classed("inactive", true);
           priceLabel
@@ -232,5 +225,7 @@ chartGroup.append("text")
             .classed("inactive", false);
         }
       }
-    })
-})
+    });
+}).catch(function(error) {
+  console.log(error);
+});
