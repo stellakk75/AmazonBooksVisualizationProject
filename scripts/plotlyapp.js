@@ -17,6 +17,10 @@ function readData(){
 readData()
 
 
+
+
+
+
 // Create bar chart 
 // function buildPlots(value) {
 //     // select dropdown menu
