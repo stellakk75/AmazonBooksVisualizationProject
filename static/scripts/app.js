@@ -23,8 +23,7 @@ var svg = d3
 var chartGroup = svg.append("g")
   .attr("transform", `translate(${margin.left}, ${margin.top})`);
 
-//initial parameters
-let chosenYAxis = "Price";
+
 
 
 // Updates y-scale var based on y-axis label 
@@ -100,7 +99,9 @@ function updateToolTip(chosenYAxis, circleGroup) {
 let parseTime = d3.timeParse('%Y')
 
 // Import data
-d3.csv("../RawData/new_books.csv").then(function(data, err){
+// const url = "new_books"
+// d3.json(url)...
+d3.csv("../RawData/bestsellers.csv").then(function(data, err){
   // console.log(data)
   if (err) throw err;
 
@@ -168,7 +169,7 @@ let ratingLabel = chartGroup.append("text")
   .text("Rating");
 
   //append x axis 
-chartGroup.append("text")
+labelGroup.append("text")
   .attr("transform", `translate(${width / 2}, ${height + margin.top + 30})`)
   .attr("class", "axisText")
   .classed("axis-text", true)
@@ -176,7 +177,7 @@ chartGroup.append("text")
 
 
 // giving error since circleGroup is already defined 
-  // var circleGroup = updateToolTip(chosenYAxis, circleGroup);
+  circleGroup = updateToolTip(chosenYAxis, circleGroup);
 
 
 // y axis labels event listener
@@ -226,6 +227,6 @@ chartGroup.append("text")
         }
       }
     });
-}).catch(function(error) {
-  console.log(error);
+// }).catch(function(error) {
+//   console.log(error);
 });
