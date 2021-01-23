@@ -1,7 +1,7 @@
 // Create a function to create a pie chart 
 function buildPie() {
 
-    d3.csv('../RawData/new_books.csv').then(data => {
+    d3.csv('../RawData/bestsellers.csv').then(data => {
     
     // Define genre 
     let genre = data.Genre;

@@ -19,6 +19,8 @@ readData()
 
 
 
+
+
 // Create bar chart 
 function buildPlots(value) {
     // select dropdown menu
@@ -43,7 +45,7 @@ function buildPlots(value) {
             if (index.Year == 2009) {
                 price.push(index.Price)
             }
-
+            
             
         });
         console.log(price)
