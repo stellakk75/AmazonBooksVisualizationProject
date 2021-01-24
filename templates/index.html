@@ -38,7 +38,7 @@
 	<div class="container">
         <strong><nav>
           <ul class="menu">
-			<a class="nav-link" href="{{ url_for('home') }}">Home</a>
+			<a class="nav-link" href="{{ url_for('index') }}">Home</a>
 			<a class="nav-link" href="{{ url_for('Visualizations') }}">Visualizations</a>	
 			<a class="nav-link" href="{{ url_for('Analysis') }}">Analysis</a>			
 			<!-- <li><a href="pg2.html">Visualizations</a></li>
@@ -67,10 +67,11 @@
 <!-- new -->
 	<script src="https://d3js.org/d3.v6.min.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/d3-tip/0.9.1/d3-tip.js"></script>
-	<script type="text/javascript" src= "../static/scripts/app.js"></script>
-	  <!-- <script type="text/javascript" src= url_for("static/scripts",filename="app.js")></script>  -->
-	  <!-- do similar for css files as well -->
+	<script src= "../static/js/app.js"></script>
+	<!-- <script type=text/javascript src="{{url_for('static', filename='app.js') }}"></script> --> 
 
+	  <!-- do similar for css files as well -->
+	  <!-- <script src="{{ url_for('static', filename='js/app.js') }}"></script> -->
  <!-- Footer-->
  <!-- <div id="footer">
     <p>Hoped you enjoyed your stay. Now get reading!</p>
