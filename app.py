@@ -35,6 +35,7 @@ def welcomeHome():
         f"/avgprice_yearly<br/>"  
         f"/avg_rating<br/>"     
         f"/genre_count<br/>"
+        f"/avg_rating_by_author<br/>"
     )
 
 @app.route("/authors")
@@ -92,6 +93,26 @@ def avg_rating():
         }
         avg_rating_list.append(data)
     return jsonify(avg_rating_list)
+
+@app.route("/avg_rating_by_author")
+def avg_rating_by_author():
+    avg_author_rating_df = pd.read_sql_query(
+                   ''' SELECT author,ROUND(avg(rating),2) FROM books \
+                       GROUP BY author \
+                       ORDER BY author
+                   ''' , db)
+    i = 0
+    avg_author_rating_list = []
+    for i in range(len(avg_author_rating_df.to_dict('split')['data'])):
+        author = avg_author_rating_df.to_dict('split')['data'][i][0]
+        rating =  avg_author_rating_df.to_dict('split')['data'][i][1]
+        data = {
+            'Author Name': author,
+            'Average Rating': rating
+        }
+        avg_author_rating_list.append(data)
+    return jsonify(avg_author_rating_list)
+
 
 @app.route("/genre_count")
 def genre_count():
