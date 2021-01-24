@@ -16,8 +16,9 @@ var svg = d3.select("#my_dataviz")
     .attr("transform", "translate(" + width / 2 + "," + height / 2 + ")");
 
 // create 2 data_set
-var data1 = {a: 9, b: 20, c:30, d:8, e:12}
-var data2 = {a: 6, b: 16, c:20, d:14, e:19, f:12}
+d3.csv("../RawData/genre.csv").then(data => {
+
+})
 
 // set the color scale
 var color = d3.scaleOrdinal()
@@ -66,46 +67,6 @@ update(data1)
 
 
   
-  // d3.json('/RawData/new_books.json').then(data => {
-
-  //     console.log(data)
-      
-  //     let level = data.books;
-   
-  //     let genre = []
-
-  //     level.forEach(index => {
-  //         // console.log(index.Price)
-  //         if (index.Genre == 2009) {
-  //             genre.push(index.Genre)
-  //         }
-
-      
-  //    });
-  //   });
-  //     console.log(genre)
-    
-
-//     // Create a pie chart
-//     let pieData = [{
-//     type: "pie",
-//     values: [nonfinction, fiction],
-//     lables: ["Non Fiction", "Fiction"],
-//     textinfo: "lable+percent",
-//     insidetextorientation: "radial"}]
-
-//     // Create a layout for the pie chart
-//     let pielayout = [{
-//     height: 700,
-//     width: 700,
-//     title: "Fiction vs Non Fiction"}];
-
-
-// Plotly.newPlot("pie", pieData, pielayout);
-
-// });
-
-// };
 
 
 
