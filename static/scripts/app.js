@@ -254,15 +254,15 @@ d3.csv("../RawData/bestsellers.csv").then(function(data){
 })
 
 
-
-// d3.json("/authors").then(function(info){ 
+// const url = "/avgprice_yearly"
+// d3.json(url).then(function(info){ 
 //   console.log(info)
-//   let level = data.books;
-//   level.forEach(index => {
-//     // console.log(index.Price)
-//     price = []
-//     if (index.Year >= 2009 && index.Year <= 2019) {
-//         price.push(index.Price)
-//     }
-//   console.log(price)}
+// //   let level = data.books;
+// //   level.forEach(index => {
+// //     // console.log(index.Price)
+// //     price = []
+// //     if (index.Year >= 2009 && index.Year <= 2019) {
+// //         price.push(index.Price)
+// //     }
+// //   console.log(price)}
 // })
