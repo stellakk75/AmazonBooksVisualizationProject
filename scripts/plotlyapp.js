@@ -5,97 +5,67 @@ function readData(){
     // read in the booksellers.csv file
     let filepath = "../RawData/bestsellers.csv"
 
-    d3.csv(filepath).then(data => {
-
-        data.forEach(function(year) {
-            dropdown.append("option").text(year.Year).property('value');
-        })
-    })
-}
+        // years = [2009, 2010, 2011, 2012, 2013, 2014, 2015, 2016, 2017, 2018, 2019]
+        // years.forEach(function(year) {
+        //     dropdown.append("option").text(year).property('value');
+        }
 
 
 readData()
 
-
+function optionChanged(val) {
+    console.log(val)
+    buildPlots(val)
+  }
 
 
 // Create bar chart 
-function buildPlots(value) {
+function buildPlots(val) {
     // select dropdown menu
     dropdown = d3.select('#selDataset')
     // assign value of change id to variable
     let id = dropdown.property("value")
+    // console.log(id)
     
-    d3.json('/RawData/new_books.json').then(data => {
+    d3.json('../RawData/new_books.json').then(data => {
 
         // console.log(data)
         
         let level = data.books;
         // console.log(level)
-        // let array = filter(bestsellersObj => bestsellersObj.Year == value);
+        let array = level.filter(bestsellersObj => bestsellersObj.id == id);
         // console.log(array)
-        let price = []
-        // for (var i = 0; i < books.Price.length; i++) {
-        //     let price = books[i];
-        // }
+        let rating = []
         level.forEach(index => {
-            // console.log(index.Price)
-            if (index.Year == 2009) {
-                price.push(index.Price)
+            // console.log(index.Rating)
+            if (index.Rating >= 0 && index.Rating <= 5.0) {
+                rating.push(index.Rating)
             }
-
-            
         });
-        console.log(price)
-//         let names = books.otu_ids;
-//         let otu_labels = result.otu_labels;
-//         // slice first 10 values for bar chart
-//         let barTrace = {
-//             x: Price.slice(0, 10).reverse(),
-//             y: Name.slice(0, 10).reverse(),
-//             type: "bar",
-//             orientation: 'h',
-//             text: Author.slice(0, 10).reverse()
-        // };
-//         // Create the data array for the bar plot
-//         let barData = [barTrace];
-//         Plotly.newPlot("bar", barData);
 
-//         // Create bubble chart
-//         let bubbleTrace = {
-//             x: result.otu_ids,
-//             y: result.sample_values,
-//             mode: 'markers',
-//             marker: {
-//                 size: sample_values,
-//                 color: result.otu_ids,
-//             },
-//             text: result.otu_labels,
-//             type: "bubble"
-//         };
-//         let bubbleData = [bubbleTrace];
-//         let bubbleLayout = {
-//             xaxis: {title: 'OTU ID'}
-//         }
-//         Plotly.newPlot("bubble", bubbleData, bubbleLayout);
-//     // Display sample metadata
-//     let level2 = data.metadata;
-//     let array2 = level2.filter(sampleObj => sampleObj.id == id);
-//     let result2 = array2[0];
-//     let demographic = d3.select('#sample-metadata');
-//     demographic.html("");
-//     returnKeyValue = Object.entries(result2);
-//     console.log(returnKeyValue);
-//     // for each keyvalue in result2 array, append to demographic info
-//     returnKeyValue.forEach(d => {
-//         demographic.append('tr').text(d[0] + ': ' + d[1])
-//     });
-    });
-};
-// function start(){
-//     readData()
-//     d3.select('#selDataset').on('change', buildPlots)
-// }
-// start()
+        let bookRating = array.rating;
+        let bookName = array.Name;
+        console.log(array);
 
-buildPlots("2016");
+        
+        // slice first 10 values for bar chart
+        let barTrace = {
+            x: bookRating.slice(0, 10).reverse(),
+            y: bookName.slice(0, 10).reverse(),
+            type: "bar",
+            orientation: 'h'
+        };
+
+        // Create the data array for the bar plot
+        let barData = [barTrace];
+
+        Plotly.newPlot("bar", barData);
+})};
+
+function start() {
+    readData()
+
+    d3.select('#selDataset').on('change', buildPlots)
+}
+
+start()
