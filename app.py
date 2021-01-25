@@ -22,12 +22,12 @@ CORS(app)
 
 # Database Setup
 connection = psycopg2.connect(user = "postgres",
-                                  password = "postgres",
+                                  password = "Isla",
                                   host = "127.0.0.1",
                                   port = "5432",
                                   database = "books")
 
-db_string = "postgres://postgres:postgres@localhost:5432/books"
+db_string = "postgres://postgres:Isla@localhost:5432/books"
 engine = connection.cursor()
 db = create_engine(db_string)
 
