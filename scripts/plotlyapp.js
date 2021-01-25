@@ -25,42 +25,41 @@ function buildPlots(val) {
     dropdown = d3.select('#selDataset')
     // assign value of change id to variable
     let id = dropdown.property("value")
-    // console.log(id)
     
-    d3.json('../RawData/new_books.json').then(data => {
-
-        // console.log(data)
+    d3.csv('../RawData/filtered-bar-plot-data.csv').then(data => {
         
-        let level = data.books;
-        // console.log(level)
-        let array = level.filter(bestsellersObj => bestsellersObj.id == id);
+        // let level = data.books;
         // console.log(array)
-        let rating = []
-        level.forEach(index => {
+        let bookRating = []
             // console.log(index.Rating)
+            // if (index.Rating >= 0 && index.Rating <= 5.0) {
+            //     rating.push(index.Rating)
+            let array = data.filter(row => row.year === id);
+
+        array.forEach(index => {
+            // rating.push(array[index].rating)
             if (index.Rating >= 0 && index.Rating <= 5.0) {
                 rating.push(index.Rating)
-            }
-        });
-
-        let bookRating = array.rating;
-        let bookName = array.Name;
-        console.log(array);
+        }
+        console.log(rating)
+    }
+        // let bookRating = array[1].rating;
+        let bookName = array[1].name;
 
         
-        // slice first 10 values for bar chart
-        let barTrace = {
-            x: bookRating.slice(0, 10).reverse(),
-            y: bookName.slice(0, 10).reverse(),
-            type: "bar",
-            orientation: 'h'
-        };
+        // // slice first 10 values for bar chart
+        // let barTrace = {
+        //     x: bookRating.slice(0, 10).reverse(),
+        //     y: bookName.slice(0, 10).reverse(),
+        //     type: "bar",
+        //     orientation: 'h'
+        // };
 
-        // Create the data array for the bar plot
-        let barData = [barTrace];
+        // // Create the data array for the bar plot
+        // let barData = [barTrace];
 
-        Plotly.newPlot("bar", barData);
-})};
+        // Plotly.newPlot("bar", barData);
+    });
 
 function start() {
     readData()

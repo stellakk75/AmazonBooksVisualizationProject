@@ -9,20 +9,25 @@ from flask import render_template, Flask
 app = Flask(__name__)
 
 @app.route('/')
-def home():
+def Home():
+    
     return render_template("index.html")
 
 
-@app.route('/Visualizations')
-def Visualizations():
+@app.route('/Years')
+def Year():
     return render_template("pg2.html")
 
 
-@app.route('/Analysis')
-def Analysis():
-    return render_template("pg3.html")
+@app.route('/Authors')
+def Authors():
+    return render_template("authors.html")
 
-# callign database using datbase
+@app.route('/Search')
+def Search():
+    return render_template("searchtool.html")
+
+# callign database 
 @app.route('/new_books')
 def new_books():
     # return jsonify() coming from database

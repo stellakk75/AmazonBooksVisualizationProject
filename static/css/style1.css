@@ -48,7 +48,7 @@
   }
   
   .inactive {
-    font-weight: lighter;
+    font-weight: black;
     fill: #551aaf;
     transition: fill 0.3s ease-out;
     text-anchor: middle;
