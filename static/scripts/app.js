@@ -23,8 +23,8 @@ var chartGroup = svg.append("g")
   .attr("transform", `translate(${margin.left}, ${margin.top})`);
 
 //initial parameters
-let chosenYAxis = "AvgRating"
-// let chosenYAxis = "AvgPrice"
+// let chosenYAxis = "AvgRating"
+let chosenYAxis = "AvgPrice"
 
 //function to update y-scale when chosen y axis changes
 function yScale(data, chosenYAxis) {
@@ -48,7 +48,6 @@ function renderAxes(newYScale, yAxis) {
 }
 
 // function used for updating circles group with a transition to
-// new circles
 function renderCircles(circlesGroup, newYScale, chosenYAxis) {
   
   circlesGroup.transition()
@@ -58,48 +57,46 @@ function renderCircles(circlesGroup, newYScale, chosenYAxis) {
   return circlesGroup;
 }
 
-// function to update line
-function renderLine(lineGroup, xScale, yLinearScale, chosenYAxis) {
+// function to update line with transition 
+function renderLine(lineGroup, xScale, newYScale, chosenYAxis) {
   console.log("working")
-  lineGroup.transition()
+  
+    lineGroup.transition()
     .duration(1000)
-    // .attr("d",d3.line()
+    .attr("d", d3.line()
+      .curve(d3.curveBasis)
       .x(d=>xScale(d.Year))
-      .y(d=>yLinearScale(d[chosenYAxis]))
-    // )
-
+      .y(d=>newYScale(d[chosenYAxis])))
     
   return lineGroup;
 }
 
-// function used for updating circles group with new tooltip
-function updateToolTip(chosenYAxis, circlesGroup) {
-
-  // var toolTip = d3.tip()
-  //   .attr("class", "tooltip")
-  //   .offset([80, -60])
-  //   .html(function(d) {
-  //     return (`${d.Author}<br>${d.Name}`);
-  //   });
-  let toolTip = d3.select('body').append('div').attr('class','tooltip')
-
-  // circlesGroup.call(toolTip);
-
-  circlesGroup.on("mouseover", function(data) {
-    // toolTip.show(data,this);
-    toolTip.style('display','block')
-    toolTip.html(function(d) {
-      return (`${d.AvgRating}<br>${d.AvgPrice}`);
-    });
-  })
-    // onmouseout event
-    .on("mouseout", function(data) {
-      toolTip.style('display','none');
-    });
-
-  return circlesGroup;
+function updateToolTip (chosenYAxis, circlesGroup){
+  let toolTip = d3.select("body").append("div")
+  .attr("class", "tooltip");
+let formatTime = d3.timeFormat("%Y")
+var label;
+if (chosenYAxis === "AvgPrice") {
+  label = "Average Prices: $";
+}
+else {
+  label = "Average Ratings: ";
 }
 
+circlesGroup.
+  on("mouseover", function(event,d) {
+  toolTip.style("display", "block");
+  toolTip.html(`<h6>${formatTime(d.Year)}</h6>${label}${d[chosenYAxis]}`)    .style("left", event.pageX + "px")
+    .style("top", event.pageY + "px");
+})
+  // Step 3: Add an onmouseout event to make the tooltip invisible
+  .on("mouseout", function() {
+    toolTip.style("display", "none");
+  });
+
+
+  return circlesGroup
+}
 
 
 // ***************************************
@@ -135,6 +132,7 @@ d3.json(url).then(function(data){
   chartGroup.append('g').attr('transform',`translate(0,${height})`).call(bottomAxis)
   let yAxis = chartGroup.append('g').classed("y-axis", true).call(leftAxis)
 
+
   //create circles
   let circlesGroup = chartGroup.selectAll('circle')
   .data(data)
@@ -147,15 +145,15 @@ d3.json(url).then(function(data){
   .attr('fill', 'steelblue')
 
 
-  // add lines
-  let line = d3.line()
-  .x(d=>xScale(d.Year))
-  .y(d=>yLinearScale(d[chosenYAxis]))
-
   let lineGroup = chartGroup.append("path")
-    .attr("d", line(data))
+    .data([data])
     .attr('stroke','black')
     .attr('fill','none')
+    .attr("d", d3.line()
+      .curve(d3.curveBasis)
+      .x(d=>xScale(d.Year))
+      .y(d=>yLinearScale(d[chosenYAxis])))
+
 
   // Create axes labels
   let priceLabel = chartGroup.append("text")
@@ -183,8 +181,28 @@ d3.json(url).then(function(data){
     .attr("class", "axisText")
     .text("Years");
 
+  let toolTip = d3.select("body").append("div")
+    .attr("class", "tooltip");
+  let formatTime = d3.timeFormat("%Y")
+  var label;
+  if (chosenYAxis === "AvgPrice") {
+    label = "Average Prices: $";
+  }
+  else {
+    label = "Average Ratings: ";
+  }
 
-
+  circlesGroup.
+    on("mouseover", function(event,d) {
+    toolTip.style("display", "block");
+    toolTip.html(`<h6>${formatTime(d.Year)}</h6>${label}${d[chosenYAxis]}`)
+      .style("left", event.pageX + "px")
+      .style("top", event.pageY + "px");
+  })
+    // Step 3: Add an onmouseout event to make the tooltip invisible
+    .on("mouseout", function() {
+      toolTip.style("display", "none");
+    });
 
 
 //y axis labels event listener
@@ -211,12 +229,13 @@ d3.json(url).then(function(data){
 
         //update lines 
         lineGroup = renderLine(lineGroup, xScale, yLinearScale, chosenYAxis)
-
+        
         // updates tooltips with new info
         circlesGroup = updateToolTip(chosenYAxis, circlesGroup);
 
+
         // changes classes to change bold text
-        if (chosenYAxis === "Rating") {
+        if (chosenYAxis === "AvgRating") {
           ratingLabel
             .classed("active", true)
             .classed("inactive", false);
