@@ -17,7 +17,8 @@ var svg = d3.select("#my_dataviz")
 
 // create 2 data_set
 d3.csv("../RawData/genre.csv").then(data => {
-
+    let nonfiction = data.nonfiction;
+    let fiction = data.fiction;
 })
 
 // set the color scale
