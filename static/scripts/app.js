@@ -23,21 +23,18 @@ var chartGroup = svg.append("g")
   .attr("transform", `translate(${margin.left}, ${margin.top})`);
 
 //initial parameters
-// let chosenYAxis = "Rating"
-let chosenYAxis = "Price"
-
+let chosenYAxis = "AvgRating"
+// let chosenYAxis = "AvgPrice"
 
 //function to update y-scale when chosen y axis changes
 function yScale(data, chosenYAxis) {
-  
   // create scales
   let yLinearScale = d3.scaleLinear()
   .domain(d3.extent(data, d=>d[chosenYAxis]))
   .range([height,0])
-    
+
   return yLinearScale;
 }
-
 
 // function used for updating yAxis var upon click on axis label
 function renderAxes(newYScale, yAxis) {
@@ -61,29 +58,48 @@ function renderCircles(circlesGroup, newYScale, chosenYAxis) {
   return circlesGroup;
 }
 
+// function to update line
+function renderLine(lineGroup, xScale, yLinearScale, chosenYAxis) {
+  console.log("working")
+  lineGroup.transition()
+    .duration(1000)
+    // .attr("d",d3.line()
+      .x(d=>xScale(d.Year))
+      .y(d=>yLinearScale(d[chosenYAxis]))
+    // )
+
+    
+  return lineGroup;
+}
 
 // function used for updating circles group with new tooltip
 function updateToolTip(chosenYAxis, circlesGroup) {
 
-  var toolTip = d3.tip()
-    .attr("class", "tooltip")
-    .offset([80, -60])
-    .html(function(d) {
-      return (`${d.Author}<br>${d.Name}`);
-    });
+  // var toolTip = d3.tip()
+  //   .attr("class", "tooltip")
+  //   .offset([80, -60])
+  //   .html(function(d) {
+  //     return (`${d.Author}<br>${d.Name}`);
+  //   });
+  let toolTip = d3.select('body').append('div').attr('class','tooltip')
 
-  circlesGroup.call(toolTip);
+  // circlesGroup.call(toolTip);
 
   circlesGroup.on("mouseover", function(data) {
-    toolTip.show(data,this);
+    // toolTip.show(data,this);
+    toolTip.style('display','block')
+    toolTip.html(function(d) {
+      return (`${d.AvgRating}<br>${d.AvgPrice}`);
+    });
   })
     // onmouseout event
-    .on("mouseout", function(data, index) {
-      toolTip.hide(data);
+    .on("mouseout", function(data) {
+      toolTip.style('display','none');
     });
 
   return circlesGroup;
 }
+
 
 
 // ***************************************
@@ -91,48 +107,11 @@ function updateToolTip(chosenYAxis, circlesGroup) {
 let parseTime = d3.timeParse('%Y')
 
 // Import data
-d3.csv("../RawData/bestsellers.csv").then(function(data){
-// d3.json("../RawData/new_books.json").then(function(data){ 
-  // let level = data.books;
-  // level.forEach(index => {
-  //   // console.log(index.Price)
-  //   price = []
-  //   if (index.Year >= 2009 && index.Year <= 2019) {
-  //       price.push(index.Price)
-  //   }
-  // console.log(price)
+// const url = "/avg_rating_price"
+const url = "http://127.0.0.1:5000/avg_rating_price"
+// const url = "../RawData/avg_rating_price.csv"
 
-
-// average book price for 2009 
-// let books=[]
-// let sum = 0 
-// data.forEach(item =>{
-//   if (item.Year == '2009'){
-//     books.push(item.Price,item.Author) 
-//   }
-//   return books
-// })
-// console.log(books)
-// console.log(books.length)
-
-// function total(list){
-//   var total = 0 
-//   for (let index = 0; index<list.length; index++){
-//       total+= index;
-//   }
-//   // return total 
-//       return avg = total/list.length;
-// }
-
-
-// console.log(`The mean is: ${total(books)}.`);
-
-
-
-// let avg = sum/books09.length
-// console.log(avg)
-
-
+d3.json(url).then(function(data){
 
   // parse out data
   data.forEach(item =>{
@@ -140,9 +119,6 @@ d3.csv("../RawData/bestsellers.csv").then(function(data){
     item.Price = +item.Price;
     item.Rating = +item.Rating;
   })
-
-
-
 
   // Create scale function
   let xScale = d3.scaleTime()
@@ -155,11 +131,9 @@ d3.csv("../RawData/bestsellers.csv").then(function(data){
   let bottomAxis = d3.axisBottom(xScale)
   let leftAxis = d3.axisLeft(yLinearScale)
 
-
   //add axes to chart
   chartGroup.append('g').attr('transform',`translate(0,${height})`).call(bottomAxis)
   let yAxis = chartGroup.append('g').classed("y-axis", true).call(leftAxis)
-
 
   //create circles
   let circlesGroup = chartGroup.selectAll('circle')
@@ -173,11 +147,15 @@ d3.csv("../RawData/bestsellers.csv").then(function(data){
   .attr('fill', 'steelblue')
 
 
-// circlesGroup = updateToolTip(chosenYAxis,circlesGroup)
-// group for 2 y-axis labels
-// let labelGroup = chartGroup.append('g')
-// .attr("transform", `translate(${width / 2}, ${height + 20})`);
+  // add lines
+  let line = d3.line()
+  .x(d=>xScale(d.Year))
+  .y(d=>yLinearScale(d[chosenYAxis]))
 
+  let lineGroup = chartGroup.append("path")
+    .attr("d", line(data))
+    .attr('stroke','black')
+    .attr('fill','none')
 
   // Create axes labels
   let priceLabel = chartGroup.append("text")
@@ -186,7 +164,7 @@ d3.csv("../RawData/bestsellers.csv").then(function(data){
     .attr("x", 0 - (height / 1.5))
     .attr("dy", "1em")
     .attr("class", "axisText")  
-    .attr("value","Price")
+    .attr("value","AvgPrice")
     .classed("active",true)
     .text("Book Prices ($)");
 
@@ -196,7 +174,7 @@ d3.csv("../RawData/bestsellers.csv").then(function(data){
     .attr("x", 0 - (height / 1.5))
     .attr("dy", "1em")
     .attr("class", "axisText")  
-    .attr("value","Rating")
+    .attr("value","AvgRating")
     .classed("inactive",true)
     .text("Rating");
 
@@ -204,6 +182,8 @@ d3.csv("../RawData/bestsellers.csv").then(function(data){
     .attr("transform", `translate(${width / 2}, ${height + margin.top + 30})`)
     .attr("class", "axisText")
     .text("Years");
+
+
 
 
 
@@ -229,8 +209,11 @@ d3.csv("../RawData/bestsellers.csv").then(function(data){
         // updates circles with new x values
         circlesGroup = renderCircles(circlesGroup, yLinearScale, chosenYAxis);
 
+        //update lines 
+        lineGroup = renderLine(lineGroup, xScale, yLinearScale, chosenYAxis)
+
         // updates tooltips with new info
-        // circlesGroup = updateToolTip(chosenYAxis, circlesGroup);
+        circlesGroup = updateToolTip(chosenYAxis, circlesGroup);
 
         // changes classes to change bold text
         if (chosenYAxis === "Rating") {
@@ -254,15 +237,3 @@ d3.csv("../RawData/bestsellers.csv").then(function(data){
 })
 
 
-// const url = "/avgprice_yearly"
-// d3.json(url).then(function(info){ 
-//   console.log(info)
-// //   let level = data.books;
-// //   level.forEach(index => {
-// //     // console.log(index.Price)
-// //     price = []
-// //     if (index.Year >= 2009 && index.Year <= 2019) {
-// //         price.push(index.Price)
-// //     }
-// //   console.log(price)}
-// })

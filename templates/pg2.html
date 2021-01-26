@@ -1,12 +1,17 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+  <meta charset="utf-8">
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>Top Books - Interactive Visualizations</title>
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
   <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+  <!-- Load d3.js -->
+  <script src="https://d3js.org/d3.v4.js"></script>
+  <!-- Color scale -->
+  <script src="https://d3js.org/d3-scale-chromatic.v1.min.js"></script>
 </head>
 <body>
   <div class="container">
@@ -20,11 +25,20 @@
       <div class="col-md-2">
         <div class="well">
           <h5>SELECT Sample:</h5>
-          <select id="selDataset" onchange="optionChanged(this.value)"></select>
+          <select id="selDataset" onchange="optionChanged(this.value)">
+            <option value="2009">2009</option>
+            <option value="2010">2010</option>
+            <option value="2011">2011</option>
+            <option value="2012">2012</option>
+            <option value="2013">2013</option>
+            <option value="2014">2014</option>
+            <option value="2015">2015</option>
+            <option value="2016">2016</option>
+            <option value="2017">2017</option>
+            <option value="2018">2018</option>
+            <option value="2019">2019</option>
+          </select>
           <script>
-            function optionChanged(val) {
-              return(this.value)
-            }
             </script>
         </div>
         <div class="panel panel-primary">
@@ -50,13 +64,29 @@
       </div>
     </div>
   </div>
+    <!-- Add 2 buttons -->
+<button onclick="update(data1)">Data 1</button>
+<button onclick="update(data2)">Data 2</button>
+  <!-- Create a div where the graph will take place -->
+<div id="my_dataviz"></div>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/5.5.0/d3.js"></script>
   <script src="../scripts/plotlyapp.js"></script>
+  <!-- <script src="../scripts/pie_graphs.js"></script> -->
   <!-- <script src="./static/js/bonus.js"></script> -->
   <!-- <script src="../new_books.csv"></script> -->
 </body>
+<<<<<<< HEAD
+</html>
+=======
 </html>
 
+<<<<<<< HEAD
+=======
+
+
+
+
+>>>>>>> 5f8d58f798cc694f641e579c26c01cadd0880801
 
 
 
@@ -67,7 +97,4 @@
 
 
 
-
-
-
-
+>>>>>>> 1301241721791d01197d80e0082bff8e9bdec2fa
