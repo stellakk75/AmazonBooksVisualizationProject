@@ -112,11 +112,7 @@ function readData(){
             type: "bar",
             orientation: 'h',
             marker: {
-<<<<<<< HEAD
                 color: 'rgb(85,107,47)'
-=======
-                color: 'rgb(191, 63, 63)'
->>>>>>> refs/remotes/origin/main
             }
         };
         
@@ -145,10 +141,8 @@ function readData(){
 
         // create the plot layout
         let barLayout = {
-            title: 'Top 10 Amazon Bestsellers',
-            font: {
-                family: "Raleway",
-            },
+            title: `Top 10 Sellers in ${id}`,
+            font:  "Avant Garde",
             showlegend: true
         };
 
