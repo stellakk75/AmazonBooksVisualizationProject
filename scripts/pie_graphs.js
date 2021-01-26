@@ -53,20 +53,20 @@ function buildPlots() {
       // let values = counts;
       console.log(counts);
 
-      let labels = [ "Fiction", "Non Fiction"];
+      // let labels = [ "Fiction", "Non Fiction" ];
 
       let pieTrace = [{
         type: "pie",
         values: counts,
-        lables: labels,
+        labels: [ "Fiction", "Non-Fiction" ],
         textinfo: "label+percent",
         // hoverinfo: 'label+percent'
         
       }]
 
-      let pielayout = [{
-        title: `Non fiction vs Fiction`
-      }];
+      let pielayout = {
+        title: `Fiction vs Non-fiction in ${id}`
+      };
       
       Plotly.newPlot("pie", pieTrace, pielayout);
     }); 
