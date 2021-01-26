@@ -35,6 +35,20 @@ db = create_engine(db_string)
 def home():
     return render_template('index.html')
 
+@app.route('/analysisBYyears')
+def analysisBYyears():
+    return render_template("pg2.html")
+
+@app.route('/analysisBYauthors')
+def analysisBYauthors():
+    return render_template("authors.html")
+
+@app.route('/searchtool')
+def searchtool():
+    return render_template("searchtool.html")
+
+# **************************qrl pulls*********************************
+
 @app.route("/authors")
 def authors():
     authors_df = pd.read_sql_query(
@@ -50,7 +64,7 @@ def authors():
             'Author' : authors
         }
         authors_list.append(data)
-    return jsonify(authors_list)
+    return jsonify(data=authors_list)
 
 @app.route("/author_books")
 def author_books():
@@ -78,7 +92,7 @@ def author_books():
                 "Genre": genre
                 }
         author_books_list.append(data)
-    return jsonify(author_books_list)
+    return jsonify(data=author_books_list)
 
 # @app.route("/avgprice_yearly")
 # def avgprice_yearly():
@@ -98,7 +112,7 @@ def author_books():
 #             'Average Price' : avgprice
 #         }
 #         avgprice_list.append(data)
-#     return jsonify(avgprice_list)
+#     return jsonify(data=avgprice_list)
 
 # @app.route("/avg_rating")
 # def avg_rating():
@@ -117,7 +131,7 @@ def author_books():
 #             'Average Rating': rating
 #         }
 #         avg_rating_list.append(data)
-#     return jsonify(avg_rating_list)
+#     return jsonify(data=avg_rating_list)
 
 @app.route("/avg_rating_by_author")
 def avg_rating_by_author():
@@ -136,7 +150,7 @@ def avg_rating_by_author():
             'AverageRating': rating
         }
         avg_author_rating_list.append(data)
-    return jsonify(avg_author_rating_list)
+    return jsonify(data=avg_author_rating_list)
 
 
 @app.route("/genre_count")
@@ -160,7 +174,7 @@ def genre_count():
             'Count': cnt
         }
         genre_count_list.append(data)
-    return jsonify(genre_count_list)                               
+    return jsonify(data=genre_count_list)                               
 
 # combined average rating and price per year
 @app.route("/avg_rating_price")
@@ -184,7 +198,7 @@ def avg_rating_price():
 
         }
         avg_rating_price_list.append(data)
-    return jsonify(avg_rating_price_list)
+    return jsonify(data=avg_rating_price_list)
    
 
 @app.route("/year_bar")
@@ -207,8 +221,28 @@ def year_bar():
                 "Price": price,
                 }
         year_bar_list.append(data)
-    return jsonify(year_bar_list)
+    return jsonify(data=year_bar_list)
 
+
+@app.route("/author_count")
+def author_count():
+    author_count_df = pd.read_sql_query(
+                   '''  SELECT author, COUNT(*) FROM books \
+                        GROUP BY author \
+                        ORDER BY author
+                   ''' , db)
+    i = 0
+    author_count_list = []
+    for i in range(len(author_count_df.to_dict('split')['data'])):
+        author = author_count_df.to_dict('split')['data'][i][0]
+        cnt = author_count_df.to_dict('split')['data'][i][1]
+
+        data = {
+            'Author': author,
+            'Count': cnt
+        }
+        author_count_list.append(data)
+    return jsonify(data=author_count_list)      
 
 if __name__ == "__main__":
     app.run(debug=True)
