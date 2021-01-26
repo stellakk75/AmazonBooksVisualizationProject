@@ -187,6 +187,27 @@ def avg_rating_price():
     return jsonify(avg_rating_price_list)
    
 
+@app.route("/year_bar")
+def year_bar():
+    year_bar_df = pd.read_sql_query(
+                   ''' SELECT name, year, price, rating FROM books \
+                       ORDER BY year
+                   ''' , db)
+    year_bar_list = [ ]
+    for i in range(len(year_bar_df.to_dict('split')['data'])):
+        name = year_bar_df.to_dict('split')['data'][i][0]
+        year = year_bar_df.to_dict('split')['data'][i][1]
+        price = year_bar_df.to_dict('split')['data'][i][2]
+        rating = year_bar_df.to_dict('split')['data'][i][3]
+
+        data = { 
+                "Year": year,
+                "Name": name,
+                "Rating": rating,
+                "Price": price,
+                }
+        year_bar_list.append(data)
+    return jsonify(year_bar_list)
 
 
 if __name__ == "__main__":
