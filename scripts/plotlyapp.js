@@ -39,27 +39,31 @@ function optionChanged(val) {
             // console.log(index.Rating)
             // if (index.Rating >= 0 && index.Rating <= 5.0) {
             //     rating.push(index.Rating)
-            let array = data.filter(row => row.year === id);
-            
-        array.forEach(index => {
 
-            let rating = []
+        let array = data.filter(row => row.year === id);
             
-            rating.push(array[index].rating)
+            array.forEach(index => {
+
+                let rating = []
+            
+                    rating.push(index.rating)
+
+                    console.log(rating)
         });
-        // console.log(rating)
-        // let bookRating = array[1].rating;
-        // let bookName = array[1].name;
-        // // slice first 10 values for bar chart
-        // let barTrace = {
-        //     x: bookRating.slice(0, 10).reverse(),
-        //     y: bookName.slice(0, 10).reverse(),
-        //     type: "bar",
-        //     orientation: 'h'
-        // };
-        // // Create the data array for the bar plot
-        // let barData = [barTrace];
-        // Plotly.newPlot("bar", barData);
+        
+        let bookRating = array[0].rating;
+        let bookName = array[0].name;
+
+        // slice first 10 values for bar chart
+        let barTrace = {
+            x: bookRating.slice(0, 10).reverse(),
+            y: bookName.slice(0, 10).reverse(),
+            type: "bar",
+            orientation: 'h'
+        };
+        // Create the data array for the bar plot
+        let barData = [barTrace];
+        Plotly.newPlot("bar", barData);
 })
 }
 

@@ -30,33 +30,43 @@ function buildPlots() {
   // grabing the genre count from the csv file 
   d3.csv('../RawData/genre.csv').then(data => {
    
+    // Grabing the data for selected year
     let array = data.filter(row => row.year === id);
     
       array.forEach(index => {
 
-       console.log(index);
+       // Define genre variable and grab the count of each genre
+       counts = [];
+       counts.push(index.count);
+       
+
+       counts = parseInt(counts);
+       console.log(counts)
+
+          // if (genre == "Fiction") {
+          
+          //   let countfinction = parseInt(index.count);
+          //   console.log(countfinction);
+          // }
+          // else {countNonfiction = index.count;}
+
+      })
       
-          if (array.index.genre == "Fiction") {
-    
-
-            countfinction = array.index.count;
-          } 
-          else {countNonfiction = array.index.count;}
-
-      }); return array;
+      let values = counts;
+      let labels = [ "Ficion", "Non Fiction"];
 
       let pieTrace = {
         type: "pie",
-        values: [countfiction, countNonfiction],
-        lables: ["Fiction", "Non Fiction"],
+        values: values,
+        lables: labels,
         textinfo: "lable+percent"
       }
 
-      let pielayout = [{
-        title: `Non fiction vs Fiction in ${val}`
-      }];
-
-      Plotly.newPlot("pie", pieTrace, pielayout);
+      // let pielayout = [{
+      //   title: `Non fiction vs Fiction in ${val}`
+      // }];
+      let piedata = [pieTrace]
+      Plotly.newPlot("pie", piedata);
     }); 
   };
 
