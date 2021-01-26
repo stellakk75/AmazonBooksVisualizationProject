@@ -112,7 +112,11 @@ function readData(){
             type: "bar",
             orientation: 'h',
             marker: {
+<<<<<<< HEAD
                 color: 'rgb(85,107,47)'
+=======
+                color: 'rgb(191, 63, 63)'
+>>>>>>> refs/remotes/origin/main
             }
         };
         
