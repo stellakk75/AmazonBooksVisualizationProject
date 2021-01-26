@@ -1,78 +1,62 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<meta charset="utf-8">
-	<title>Amazon Bestsellers Library</title>
-	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/css/materialize.min.css">
-  	<!-- <link rel="stylesheet" href="../static/css/style.css"/> -->
-	<link rel="stylesheet" type="text/css" href="../static/css/style1.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+    <link rel="stylesheet" href="../static/css/style.css"/>
+    <title>Amazon Bestsellers Library</title>
 </head>
 
 <body>
-
-	<!-- backgound image -->
-	<!-- <style>
-		body {
-		  background-image: url('../static/css/books.jpeg');
-		}
-		</style> -->
 
 <!-- Title/jumbotron text  -->
 <div class="container">
     
     <div class="row">
       <div class="col-md-12 jumbotron text-center">
-		<style>
-			.row {
-				<!--#CFD8DC-->
-				background-color: #EBEBEB;
-			}
+		<style>.row {<!--#CFD8DC-->
+					background-color: #EBEBEB;}
 		</style>
 		<h1>Amazon Bestsellers Library</h1>	
-		<p><h5>(2009-2019)</h5></p>
 
       </div>
 	</div>
+
+<!-- navigation bar. Need to update links -->
+	<ul class="nav nav-pills">
+		<li class="nav-item">
+		  <a class="nav-link active" href="index.html">Home</a>
+		</li>
+		<li class="nav-item">
+		  <a class="nav-link" href="Genre.html">Author/Genre</a>
+		</li>
+		<li class="nav-item">
+		  <a class="nav-link" href="#">??</a>
+		</li>
+		<li class="nav-item">
+		  <a class="nav-link disabled" href="searchtool.html">Search Tool</a>
+		</li>
+	  </ul>
+
+    </br>
+</br>
+
+
+<div class="container">
+    <div class="col-xs-12  col-md-9">
+    <div class="chart">
+    
+    <!-- Scatter plot here. -->
+    </div>
+    </div>
 </div>
 
-	<!-- navigation bar. Need to update links -->
-	 <div class="container">
-        <strong><nav>
-          <ul class="menu">
-			<li><a class="nav-link" href="{{ url_for('home') }}">Home</a></li>
-
-          </ul>
-        </nav></strong>
-      </div>
-
-
-<!-- div for 2009-2019 visualization -->
-	</br>
-	</br>
-	<div class="row">
-		<div class="col-xs-12  col-md-9">
-		<div class="chart">
-		
-		<!-- Scatter plot here. -->
-		</div>
-		</div>
-	</div>
-
-
-
-
-
-<!-- new -->
-	<script src="https://d3js.org/d3.v6.min.js"></script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/d3-tip/0.9.1/d3-tip.js"></script>
-	<script src= "../static/scripts/app.js"></script>
-
- <!-- Footer-->
- <!-- <div id="footer">
-    <p>Hoped you enjoyed your stay. Now get reading!</p>
-  </div> -->
-
-
 </body>
+<!-- Footer-->
+<div id="footer">
+    <p>Hoped you enjoyed your stay. Now get reading!</p>
+  </div>
 
 </html>

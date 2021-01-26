@@ -2,12 +2,12 @@
 <html lang="en">
 <head>
   <meta charset="utf-8">
-  <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>Top Books - Interactive Visualizations</title>
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
   <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+<<<<<<< HEAD
 
    <style> 
     .main-svg {
@@ -16,22 +16,48 @@
     </style>
 
 
+=======
+>>>>>>> adb07e258f0233cb2b13d2aef3bc4da455c30a4e
   <!-- Load d3.js -->
   <script src="https://d3js.org/d3.v6.js"></script>
-
   <!-- Color scale -->
   <script src="https://d3js.org/d3-scale-chromatic.v1.min.js"></script>
 </head>
 <body>
+
+  
+    
   <div class="container">
     <div class="row">
       <div class="col-md-12 jumbotron text-center">
-        <h1>Interactive Visualizations</h1>
-        <p>Use the interactive charts below to explore the dataset</p>
+        <h1>Explore Top Books</h1>
+        <p>Use the dropdown selection below to explore more data</p>
       </div>
     </div>
-    <div class="row">
-      <div class="col-md-2">
+
+    <ul class="nav nav-pills">
+      <li class="nav-item"> <a class="nav-link active" href="index.html">Home</a></li>
+      <li class="nav-item"> <a class="nav-link" href="pg2.html">Author/Genre</a> </li>
+      <li class="nav-item"><a class="nav-link" href="#">??</a> </li>
+      <li class="nav-item"><a class="nav-link" href="searchtool.html">Search Tool</a> </li>
+      
+    </ul>
+
+<!-- 
+    <div class="container">
+      <strong><nav>
+        <ul class="menu">
+    <li><a class="nav-link" href="index.html">Home</a></li>
+    <li><a class="nav-link" href="pg2.html">Author/Genre</a></li>
+    <li><a class="nav-link" href="{{ url_for('home') }}">???</a></li>
+    <li><a class="nav-link" href="searchtool.html">Search Tool</a></li>
+  
+        </ul>
+      </nav></strong>
+    </div> -->
+
+    <div class="container">
+      <div class="col-md-3">
         <div class="well">
           <h5>SELECT Sample:</h5>
           <select id="selDataset" onchange="optionChanged(this.value)">
@@ -50,10 +76,29 @@
           </select>
 
         </div>
+<<<<<<< HEAD
      
-      <div class="col-md-5">
-        <div id="gauge"></div>
+=======
       </div>
+<<<<<<< HEAD
+    </div>
+
+>>>>>>> adb07e258f0233cb2b13d2aef3bc4da455c30a4e
+      <div class="col-md-5">
+        <div id="bar"></div>
+      </div>
+
+
+      <div class="col-md-7">
+      <div id="pie"></div>
+    </div>
+   
+=======
+      <div id="my_dataviz"></div>
+      <div class="row">
+      <div class="col-md-7">
+      <div id="pie"></div>
+    </div>
     </div>
 
   </div>
@@ -61,14 +106,31 @@
     <div id="bar"></div>
   </div>
 
-  <!-- Create a div where the graph will take place -->
-<div id="my_dataviz"></div>
-
+>>>>>>> refs/remotes/origin/main
   <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/5.5.0/d3.js"></script>
+<<<<<<< HEAD
   <script src="../scripts/plotlyapp.js"></script>
   <!-- <script src="../scripts/pie_graphs.js"></script> -->
   <!-- <script src="../new_books.csv"></script> -->
+=======
+  <script src="../static/scripts/pg2.js"></script>
+
+>>>>>>> adb07e258f0233cb2b13d2aef3bc4da455c30a4e
 </body>
 </html>
 </html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 

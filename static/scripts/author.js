@@ -25,11 +25,12 @@ function buildBar(name){
     let id = dropDown.property("value")
     // console.log(id)
 
-    
-    
+
     var svg = d3.select("body").append("svg")
 	.attr("height", 960)
 	.attr("width", 1000);
+
+    
 
     var table = d3.select("#table-location")
         .append("table")
@@ -37,10 +38,11 @@ function buildBar(name){
         thead = table.append("thead"),
         tbody = table.append("tbody");
 
+
     //read file. then grab relevant data and create visualizations accordingly 
     d3.json('http://127.0.0.1:5000/author_books').then(item=>{
         // console.log(item)
-        
+ 
         let data = item.filter(row => row.Author === id);
         // console.log(data)
 
@@ -56,7 +58,8 @@ function buildBar(name){
 		.enter()
 		.append("th")
 			.text(function(d){ return d;})
-              
+        // header.exit().remove()
+
         var rows = tbody.selectAll("tr")
         .data(data)
         .enter()
@@ -69,6 +72,7 @@ function buildBar(name){
             d3.select(this)
                 .style("background-color","transparent");
         });
+        // rows.exit().remove()
 
     	var cells = rows.selectAll("td")
 		.data(function(row){
@@ -79,6 +83,9 @@ function buildBar(name){
 		.enter()
 		.append("td")
 		.html(function(d){ return d.value;});		
+        
+        // cells.exit().remove()
+        // d3.select('#table-location').remove() 
     })
 
 //rating gauge chart 
