@@ -32,16 +32,14 @@ function buildPlots() {
    
     // Grabing the data for selected year
     let array = data.filter(row => row.year === id);
-    
+    counts = [];
       array.forEach(index => {
-
+        
        // Define genre variable and grab the count of each genre
-       counts = [];
+       index.count = parseInt(index.count)
        counts.push(index.count);
-       
 
-       counts = parseInt(counts);
-       console.log(counts)
+      //  counts = parseInt(counts);
 
           // if (genre == "Fiction") {
           
@@ -52,21 +50,25 @@ function buildPlots() {
 
       })
       
-      let values = counts;
-      let labels = [ "Ficion", "Non Fiction"];
+      // let values = counts;
+      console.log(counts);
 
-      let pieTrace = {
+      // let labels = [ "Fiction", "Non Fiction" ];
+
+      let pieTrace = [{
         type: "pie",
-        values: values,
-        lables: labels,
-        textinfo: "lable+percent"
-      }
+        values: counts,
+        labels: [ "Fiction", "Non-Fiction" ],
+        textinfo: "label+percent",
+        // hoverinfo: 'label+percent'
+        
+      }]
 
-      // let pielayout = [{
-      //   title: `Non fiction vs Fiction in ${val}`
-      // }];
-      let piedata = [pieTrace]
-      Plotly.newPlot("pie", piedata);
+      let pielayout = {
+        title: `Fiction vs Non-fiction in ${id}`
+      };
+      
+      Plotly.newPlot("pie", pieTrace, pielayout);
     }); 
   };
 
