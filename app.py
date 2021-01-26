@@ -64,7 +64,7 @@ def authors():
             'Author' : authors
         }
         authors_list.append(data)
-    return jsonify(data=authors_list)
+    return jsonify(authors_list)
 
 @app.route("/author_books")
 def author_books():
@@ -92,7 +92,7 @@ def author_books():
                 "Genre": genre
                 }
         author_books_list.append(data)
-    return jsonify(data=author_books_list)
+    return jsonify(author_books_list)
 
 # @app.route("/avgprice_yearly")
 # def avgprice_yearly():
@@ -150,7 +150,7 @@ def avg_rating_by_author():
             'AverageRating': rating
         }
         avg_author_rating_list.append(data)
-    return jsonify(data=avg_author_rating_list)
+    return jsonify(avg_author_rating_list)
 
 
 @app.route("/genre_count")
@@ -198,7 +198,7 @@ def avg_rating_price():
 
         }
         avg_rating_price_list.append(data)
-    return jsonify(data=avg_rating_price_list)
+    return jsonify(avg_rating_price_list)
    
 
 @app.route("/year_bar")
