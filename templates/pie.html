@@ -4,11 +4,10 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>Amazon Bestsellers Library</title>
+  <title>Top Books - Interactive Visualizations</title>
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/css/materialize.min.css">
   <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
-  <!-- <link rel="stylesheet" type="text/css" href="../static/css/style1.css"> -->
+  <link rel="stylesheet" type="text/css" href="../static/css/style1.css">
 
   <!-- Load d3.js -->
   <script src="https://d3js.org/d3.v6.js"></script>
@@ -18,42 +17,36 @@
 </head>
 <body>
 
- <!-- Title/jumbotron text  -->
-<div class="container">  
-  <div class="row">
-    <div class="col-md-12 jumbotron text-center">
-      <style>
-    .row {
-      <!--#CFD8DC-->
-      background-color: #EBEBEB;
-    }
-  </style>
-  <h1>Amazon Bestsellers Library</h1>	
-  <p><h5>(2009-2019)</h5></p>
 
-    </div>
-</div>
-</div>
-    
-	<!-- navigation bar. Need to update links -->
+<!-- Title/jumbotron text  -->
+
+<!-- navigation bar. Need to update links -->
+
   <div class="container">
-    <strong><nav>
-      <ul class="menu">
-  <li><a class="nav-link" href="index.html">Home</a></li>
-  <li><a class="nav-link" href="pie.html">Author/Genre</a></li>
-  <li><a class="nav-link" href="{{ url_for('home') }}">???</a></li>
-  <li><a class="nav-link" href="searchtool.html">Search Tool</a></li>
+    <div class="row">
+      <div class="col-md-12 jumbotron text-center">
+        <h1>Interactive Visualizations</h1>
+        <p>Use the interactive charts below to explore the dataset</p>
+      </div>
+    </div>
+    <div class="container">
+      <strong><nav>
+        <ul class="menu">
+    <li><a class="nav-link" href="index.html">Home</a></li>
+    <li><a class="nav-link" href="pie.html">Author/Genre</a></li>
+    <li><a class="nav-link" href="{{ url_for('home') }}">???</a></li>
+    <li><a class="nav-link" href="searchtool.html">Search Tool</a></li>
 
-      </ul>
-    </nav></strong>
-  </div>
+        </ul>
+      </nav></strong>
+    </div>
 
     <div class="row">
       <div class="col-md-2">
         <div class="well">
-          <h5>Select Year:</h5>
+          <h5>SELECT Sample:</h5>
           <select id="selDataset" onchange="optionChanged(this.value)">
-            <option value="select">-</option>
+            <option value="select">Select Year</option>
             <option value="2009">2009</option>
             <option value="2010">2010</option>
             <option value="2011">2011</option>
@@ -68,24 +61,26 @@
           </select>
           <script>
             </script>
-        </div>  
         </div>
+      
+    </div>
   </div>
 
   <!-- Create a div where the graph will take place -->
-<div id="my_dataviz"></div>
-<div class="row">
-    <div class="col-md-12">
-        <div id="pie"></div>
-    </div>
+
+<div class="col-md-5">
+  <div id="bar"></div>
+</div>
+<div class="col-md-5">
+  <div id="pie"></div>
+</div>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/5.5.0/d3.js"></script>
+  <script src="../scripts/plotlyapp.js"></script>
   <script src="../scripts/pie_graphs.js"></script>
-  <script src="https://d3js.org/d3.v6.min.js"></script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/d3-tip/0.9.1/d3-tip.js"></script>
-	<script src= "../static/scripts/app.js"></script>
+  <!-- <script src="../new_books.csv"></script> -->
 </body>
-
+<!-- <<<<<<< HEAD -->
 </html>
-
+<!-- ======= -->
 </html>
 
