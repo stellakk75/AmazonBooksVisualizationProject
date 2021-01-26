@@ -9,9 +9,10 @@ function readData(){
     //     })
     // })
 }
+
 function optionChanged(val) {
     console.log(val)
-  };
+};
 
   function buildPlots(val) {
     // select dropdown menu
@@ -20,8 +21,14 @@ function optionChanged(val) {
     // assign value of change id to variable
     let id = dropdown.property("value")
     d3.csv('../RawData/filtered-bar-plot-data.csv').then(data => {
+        // d3.json(http://127.0.0.1:5000/authors).then(data => {
+    
         let ratingArray = []
         let nameArray = []
+        let above20Array = []
+        let above10Array = []
+        let below10Array = []
+        let array = data.filter(row => row.year === id);
             // console.log(index.Rating)
             // if (index.Rating >= 0 && index.Rating <= 5.0) {
             //     rating.push(index.Rating)
@@ -36,60 +43,25 @@ function optionChanged(val) {
         });
         // console.log(nameArray)
 
-        array.forEach(index => {
-            if (data.price > 20) {
-                return above20Trace
-            }
-        });
-
-        array.forEach(index => {
-            if (data.price > 10 && data.price < 20) {
-                return above10Trace
-            }
-        });
-
-        array.forEach(index => {
-            if (data.price < 10) {
-                return below10Trace
-            }
-        });
-
         let bookRating = ratingArray
         let bookName = nameArray
+        let barColor = ['red', 'red', 'red', 'red', 'purple', 'purple', 'purple', 'purple', 'blue', 'blue', 'blue']
+
 
         // slice first 10 values for bar chart
-        let above20Trace = {
-            x: bookRating.slice(0, 10).reverse(),
+        let barTrace = {
+            // x: bookRating.slice(0, 10).reverse(),
+            x: [4.0, 4.1, 4.2, 4.3, 4.4, 4.5, 4.6, 4.7, 4.8, 4.9, 5.0],
             y: bookName.slice(0, 10).reverse(),
             type: "bar",
             orientation: 'h',
             marker: {
-                color: 'rgb(191, 63, 63)'
-            }
-        };
-        
-        let above10Trace = {
-            x: bookRating.slice(0, 10).reverse(),
-            y: bookName.slice(0, 10).reverse(),
-            type: "bar",
-            orientation: 'h',
-            marker: {
-                color: 'rgb(191, 63, 127)'
-            }
-        };
-
-        let below10Trace = {
-            x: bookRating.slice(0, 10).reverse(),
-            y: bookName.slice(0, 10).reverse(),
-            type: "bar",
-            orientation: 'h',
-            marker: {
-                color: 'rgb(63, 63, 191)'
+                color: barColor
             }
         };
 
         //create the data array for the bar plot
-        let barData = [above20Trace, above10Trace, below10Trace];
+        let barData = [barTrace];
 
         // create the plot layout
         let barLayout = {
@@ -97,7 +69,10 @@ function optionChanged(val) {
             font: {
                 family: "Raleway",
             },
-            showlegend: true
+            showlegend: false,
+            yaxis: {
+                automargin: true
+            }
         };
 
         Plotly.newPlot("bar", barData, barLayout);
