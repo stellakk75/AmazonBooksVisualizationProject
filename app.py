@@ -72,26 +72,34 @@ def author_books():
                    ''' SELECT * FROM books \
                        ORDER BY author asc
                    ''' , db)
-    author_books_list = [ ]
-    for i in range(len(authors_books_df.to_dict('split')['data'])):
-        name = authors_books_df.to_dict('split')['data'][i][0]
-        author = authors_books_df.to_dict('split')['data'][i][1]
-        rating = authors_books_df.to_dict('split')['data'][i][2]
-        review = authors_books_df.to_dict('split')['data'][i][3]
-        price = authors_books_df.to_dict('split')['data'][i][4]
-        year = authors_books_df.to_dict('split')['data'][i][5]
-        genre = authors_books_df.to_dict('split')['data'][i][6]
+    author_books_list = []
+    # // below for loop has performnace issues
+    # for i in range(len(authors_books_df.to_dict('split')['data'])):
+    #     name = authors_books_df.to_dict('split')['data'][i][0]
+    #     author = authors_books_df.to_dict('split')['data'][i][1]
+    #     rating = authors_books_df.to_dict('split')['data'][i][2]
+    #     review = authors_books_df.to_dict('split')['data'][i][3]
+    #     price = authors_books_df.to_dict('split')['data'][i][4]
+    #     year = authors_books_df.to_dict('split')['data'][i][5]
+    #     genre = authors_books_df.to_dict('split')['data'][i][6]
    
-        data = { 
-                "Author": author,
-                "Title": name,
-                "Reviews": review,
-                "Rating": rating,
-                "Price": price,
-                "Year": year,
-                "Genre": genre
-                }
-        author_books_list.append(data)
+    for index, row in authors_books_df.iterrows(): 
+        data = { 'Author':row["author"], 'Title': row["name"],
+                'Reviews':row["reviews"], 'Rating':row["rating"], 
+                'Price':row["price"],'Year':row['year'],
+                    'Genre':row["genre"]}
+        author_books_list.append(data);
+
+        # data = { 
+        #         "Author": author,
+        #         "Title": name,
+        #         "Reviews": review,
+        #         "Rating": rating,
+        #         "Price": price,
+        #         "Year": year,
+        #         "Genre": genre
+        #         }
+        # author_books_list.append(data)
     return jsonify(author_books_list)
 
 # @app.route("/avgprice_yearly")

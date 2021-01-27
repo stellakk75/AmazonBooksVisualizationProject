@@ -1,82 +1,123 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
-    <link rel="stylesheet" href="../static/css/search.css"/>
-    <link rel="stylesheet" href="../static/css/style.css"/>
+<html>
+<title>Amazon Bestsellers Library</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/js/materialize.min.js"></script>
+<link rel="stylesheet" href="../static/css/search.css"/>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/2.0.2/anime.min.js"></script>
 
+<style>
+html,body,h1,h2,h3,h4,h5 {font-family: "Raleway", sans-serif}
+</style>
+<body class="w3-clear">
 
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/css/materialize.min.css">
-    
-
-
-    <title>Amazon Bestsellers Library</title>
-</head>
-
-<body>
-
-<!-- Title/jumbotron text  -->
-<div class="container">
-    
-    <div class="row">
-      <div class="col-md-12 jumbotron text-center">
-		<style>.row {<!--#CFD8DC-->
-					background-color: #EBEBEB;}
-		</style>
-		<h1>Amazon Bestsellers Library</h1>	
-
-      </div>
-	</div>
-
-<!-- navigation bar. Need to update links -->
-	<ul class="nav nav-pills">
-		<li class="nav-item">
-		  <a class="nav-link active" href="index.html">Home</a>
-		</li>
-		<li class="nav-item">
-		  <a class="nav-link" href="Genre.html">Author/Genre</a>
-		</li>
-		<li class="nav-item">
-		  <a class="nav-link" href="#">??</a>
-		</li>
-		<li class="nav-item">
-		  <a class="nav-link disabled" href="searchtool.html">Search Tool</a>
-		</li>
-	  </ul>
-
-    </br>
-</br>
-
-
-<div id="search" class="f5f5f5 grey lighten-4 z-depth-5">
-  <form id="myform">
-      <div class="input-field">
-          <input type="search" id="books">
-          <label for="search">Search Books</label>
-      </div>
-      <button class="btn red">Search Books</button>
-  </form>
+<!-- Top container -->
+<div class="w3-bar w3-top w3-black w3-large" style="z-index:4">
+  <button class="w3-bar-item w3-button w3-hide-large w3-hover-none w3-hover-text-light-grey" onclick="w3_open();"><i class="fa fa-bars"></i>  Menu</button>
+  <span class="w3-bar-item w3-right">Team Kitten</span>
 </div>
 
+<!-- Sidebar/menu -->
+<nav class="w3-sidebar w3-collapse w3-white w3-animate-left" style="z-index:3;width:300px;" id="mySidebar"><br>
+  <div class="w3-container w3-row">
+    <div class="w3-col s8 w3-bar">
+      <span>Welcome! <strong></strong></span><br>
+    
 
-<div id="result"></div>
+    </div>
+  </div>
+  <hr>
+  <div class="w3-container">
+    <h5>Menu</h5>
+  </div>
+  <div class="w3-bar-block">
+    <a href="#" class="w3-bar-item w3-button w3-padding-16 w3-hide-large w3-dark-grey w3-hover-black" onclick="w3_close()" title="close menu"><i class="fa fa-remove fa-fw"></i>  Close Menu</a>
+    <a href="{{ url_for('home') }}" class="w3-bar-item w3-button w3-padding w3-padding"><i class="fa fa-eye fa-fw"></i>  Overview</a>
+    <a href="{{ url_for('analysisBYyears') }}" class="w3-bar-item w3-button w3-padding"><i class="fa fa-bullseye fa-fw"></i>  Yearly Analysis</a>
+    <a href="{{ url_for('analysisBYauthors') }}" class="w3-bar-item w3-button w3-padding"><i class="fa fa-users fa-fw"></i>  Authors Analysis</a>
+    <a href="{{ url_for('searchtool') }}" class="w3-bar-item w3-button w3-red"><i class="fa fa-bank fa-fw"></i>  Search Tool</a>
 
+  </div>
+</nav>
+
+
+<!-- Overlay effect when opening sidebar on small screens -->
+<div class="w3-overlay w3-hide-large w3-animate-opacity" onclick="w3_close()" style="cursor:pointer" title="close side menu" id="myOverlay"></div>
+
+<!-- !PAGE CONTENT! -->
+<div class="w3-main" style="margin-left:300px;margin-top:43px;">
+
+  <!-- Header -->
+  <header class="w3-container" style="padding-top:22px">
+    <h1 class="ml2"><b><i class="fa fa-dashboard"></i> Amazon Bestsellers Library </b></h1>
+  </header>
+
+
+  <!-- Search tool -->
+
+  <div id ="search" class="container">
+    <!-- <div class ="container"> -->
+    <div class="row justify-content-md-center">
+      <div class="col col-lg-2">
+
+  <div id="search" class="f5f5f5 grey lighten-4 z-depth-5"> 
+    <form id="myform">
+        <div class="input-field">
+            <input type="search" id="books">
+            <!-- <label for="search">Search Books</label> -->
+        </div>
+          
+        <button class="w3-button w3-red">Search Books</button>
+
+
+    </form>
+  </div>
+  </div>
+  </div>
+  
+  <div id="result"></div>
+  
+ 
+
+
+  <!-- End page content -->
+</div>
+
+<script>
+// Get the Sidebar
+var mySidebar = document.getElementById("mySidebar");
+
+// Get the DIV with overlay effect
+var overlayBg = document.getElementById("myOverlay");
+
+// Toggle between showing and hiding the sidebar, and add overlay effect
+function w3_open() {
+  if (mySidebar.style.display === 'block') {
+    mySidebar.style.display = 'none';
+    overlayBg.style.display = "none";
+  } else {
+    mySidebar.style.display = 'block';
+    overlayBg.style.display = "block";
+  }
+}
+
+// Close the sidebar with the close button
+function w3_close() {
+  mySidebar.style.display = "none";
+  overlayBg.style.display = "none";
+}
+</script>
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/js/materialize.min.js"></script>
+<script src="../static/scripts/anime.js"></script>
 <script src="..static/scripts/myscript.js"></script>
 <script src="../static/scripts/searchtool.js"></script>
+
+
 </body>
-<footer>
-<div id="footer">
-  <p>Hoped you enjoyed your stay. Now get reading!</p>
-</div>
-</footer>
-
-
-  
-
 </html>

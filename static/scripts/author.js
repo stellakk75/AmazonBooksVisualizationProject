@@ -93,23 +93,44 @@ let filepath = "/avg_rating_by_author"
 d3.json(filepath).then(index => {
     // console.log(index)
 
-    let new_data = index.filter(row => row.Author === id);
+    let new_data = index.filter((row) => row.Author === id);
     // console.log(new_data.length)
     // console.log(new_data)
     // console.log(new_data[0].AverageRating)
 
     let bonus = [
-        {
-            domain: { x: [0,1], y: [0, 1] },
-            type: 'indicator',
-            value: new_data[0].AverageRating,
-            title: { text: "<b>Rating</b>" },
-            gauge: { axis: { range: [null,5] },
-                steps: [{range:[0,1]},{range:[1,2]},{range:[2,3]},{range:[3,4]},
-                {range:[4,5]}]},
-            mode: "gauge+number",
-        }];
-    Plotly.newPlot('gauge', bonus);   
-})
-    
+      {
+        domain: { x: [0, 1], y: [0, 1] },
+        type: "indicator",
+        value: new_data[0].AverageRating,
+        title: { text: "<b>Rating</b>" },
+        gauge: {
+          axis: { range: [null, 5] },
+          steps: [
+            { range: [0, 1] },
+            { range: [1, 2] },
+            { range: [2, 3] },
+            { range: [3, 4] },
+            { range: [4, 5] },
+          ],
+        },
+        mode: "gauge+number",
+      },
+    ];
+
+    // let layout = {
+    //   autosize: true,
+    //   width: 500,
+    //   height: 500,
+    //   margin:{
+    //     l:50,
+    //     r:50,
+    //     b:100,
+    //     t:100,
+    //     pad:4
+    //   }
+    // }
+
+    Plotly.newPlot("gauge", bonus);
+  });
 }
