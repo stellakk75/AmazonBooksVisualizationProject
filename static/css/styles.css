@@ -63,3 +63,13 @@ button{
 	margin: 0;
 	font-size: 16px;
   }
+
+  .ml2 {
+	font-weight: 900;
+	font-size: 3.5em;
+  }
+  
+  .ml2 .letter {
+	display: inline-block;
+	line-height: 1em;
+  }

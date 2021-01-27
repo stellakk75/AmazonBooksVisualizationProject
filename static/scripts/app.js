@@ -107,9 +107,10 @@ function updateToolTip(chosenYAxis, circlesGroup) {
 let parseTime = d3.timeParse("%Y");
 
 // Import data
-const url = "/avg_rating_price";
-// const url = "http://127.0.0.1:5000/avg_rating_price"
-// const url = "../RawData/avg_rating_price.csv"
+
+const url = "/avg_rating_price"
+//const url = "http://127.0.0.1:5000/avg_rating_price"
+
 
 d3.json(url).then((data) => {
   console.log(data);
