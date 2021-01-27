@@ -19,6 +19,10 @@
     })
     
 function buildBar(name){
+    console.log("Inside buildBar");
+    // rows.exit().remove();
+    let xx = d3.select("#table-location");
+    xx.selectAll("*").remove()
     //select dropdown menu 
     dropDown = d3.select('#selDataset')
     // assigns value of change id to variable 

@@ -182,7 +182,8 @@ def genre_count():
             'Count': cnt
         }
         genre_count_list.append(data)
-    return jsonify(data=genre_count_list)                               
+    return jsonify(genre_count_list)                               
+
 
 # combined average rating and price per year
 @app.route("/avg_rating_price")
@@ -229,7 +230,7 @@ def year_bar():
                 "Price": price,
                 }
         year_bar_list.append(data)
-    return jsonify(data=year_bar_list)
+    return jsonify(year_bar_list)
 
 
 @app.route("/author_count")

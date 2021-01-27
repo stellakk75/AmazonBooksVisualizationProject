@@ -76,31 +76,33 @@ function renderLine(lineGroup, xScale, newYScale, chosenYAxis) {
   return lineGroup;
 }
 
-function updateToolTip(chosenYAxis, circlesGroup) {
-  let toolTip = d3.select("body").append("div").attr("class", "tooltip");
-  let formatTime = d3.timeFormat("%Y");
-  var label;
-  if (chosenYAxis === "AvgPrice") {
-    label = "Average Prices: $";
-  } else {
-    label = "Average Ratings: ";
-  }
+// function updateToolTip(chosenYAxis, circlesGroup) {
+//   let toolTip = d3.select("body").append("div").attr("class", "tooltip");
+//   let formatTime = d3.timeFormat("%Y");
+//   var label;
+//   if (chosenYAxis === "AvgPrice") {
+//     label = "Average Prices: $";
+//   } else {
+//     label = "Average Ratings: ";
+//   }
+//   console.log(chosenYAxis)
+//   circlesGroup
+//     .on("mouseover", function (event, d) {
+//       toolTip.style("display", "block");
+//       toolTip
+//         .html('hello')
+//         // .html(`<h6>${formatTime(d.Year)}</h6>${label}${d[chosenYAxis]}`)
+//         .style("left", event.pageX + "px")
+//         .style("top", event.pageY + "px");
+//     })
 
-  circlesGroup
-    .on("mouseover", function (event, d) {
-      toolTip.style("display", "block");
-      toolTip
-        .html(`<h6>${formatTime(d.Year)}</h6>${label}${d[chosenYAxis]}`)
-        .style("left", event.pageX + "px")
-        .style("top", event.pageY + "px");
-    })
-    // Step 3: Add an onmouseout event to make the tooltip invisible
-    .on("mouseout", function () {
-      toolTip.style("display", "none");
-    });
+//     // Step 3: Add an onmouseout event to make the tooltip invisible
+//     .on("mouseout", function () {
+//       toolTip.style("display", "none");
+//     });
 
-  return circlesGroup;
-}
+//   return circlesGroup;
+// }
 
 // ***************************************
 
@@ -115,8 +117,8 @@ d3.json(url).then((data) => {
   // parse out data
   data.forEach((item) => {
     item.Year = parseTime(item.Year);
-    item.Price = +item.Price;
-    item.Rating = +item.Rating;
+    // item.Price = +item.Price;
+    // item.Rating = +item.Rating;
   });
 
   // Create scale function
@@ -193,27 +195,55 @@ d3.json(url).then((data) => {
     .attr("class", "axisText")
     .text("Years");
 
-  let toolTip = d3.select("body").append("div").attr("class", "tooltip");
+  // let toolTip = d3.select("body").append("div").attr("class", "tooltip");
   let formatTime = d3.timeFormat("%Y");
+
   var label;
   if (chosenYAxis === "AvgPrice") {
     label = "Average Prices: $";
   } else {
     label = "Average Ratings: ";
   }
+  
+  // console.log(data)
+  // console.log(data[0].AvgRating)
+ 
 
-  circlesGroup
-    .on("mouseover", function (event, d) {
-      toolTip.style("display", "block");
-      toolTip
-        .html(`<h6>${formatTime(d.Year)}</h6>${label}${d[chosenYAxis]}`)
-        .style("left", event.pageX + "px")
-        .style("top", event.pageY + "px");
-    })
-    // Step 3: Add an onmouseout event to make the tooltip invisible
-    .on("mouseout", function () {
-      toolTip.style("display", "none");
-    });
+  // function listloop(list){
+  //   let value_array = []
+  //   for (var i=0; i<list.length; i++){
+  //     let value = list[i].AvgPrice
+  //     value_array.push(value)
+  //     console.log(value_array)
+  //   }
+  // }
+  // function listloop2(list){
+  //   let value_array = []
+  //   for (var i=0; i<list.length; i++){
+  //     let value = list[i].AvgRating
+  //     value_array.push(value)
+  //     console.log(value_array)
+  //   }
+  // }
+
+  // listloop(data) //chooses this function if YAxis is avg price
+  // listloop2(data) //chooses this function if YAxis is avg rating
+
+  // console.log(formatTime(data[0].Year))
+
+  // circlesGroup
+  //   .on("mouseover", function (event, d) {
+  //     toolTip.style("display", "block");
+  //     toolTip
+  //       .html(`<h6>${formatTime(d.Year)}</h6>${label}${d[chosenYAxis]}`)
+  //       // .html(`<h6>${formatTime(d.Year)}</h6>${label}${d[chosenYAxis]}`)
+  //       .style("left", event.pageX + "px")
+  //       .style("top", event.pageY + "px");
+  //   })
+  //   // Step 3: Add an onmouseout event to make the tooltip invisible
+  //   .on("mouseout", function () {
+  //     toolTip.style("display", "none");
+  //   });
 
   //y axis labels event listener
   chartGroup.selectAll("text").on("click", function () {
@@ -239,7 +269,7 @@ d3.json(url).then((data) => {
       lineGroup = renderLine(lineGroup, xScale, yLinearScale, chosenYAxis);
 
       // updates tooltips with new info
-      circlesGroup = updateToolTip(chosenYAxis, circlesGroup);
+      // circlesGroup = updateToolTip(chosenYAxis, circlesGroup);
 
       // changes classes to change bold text
       if (chosenYAxis === "AvgRating") {
