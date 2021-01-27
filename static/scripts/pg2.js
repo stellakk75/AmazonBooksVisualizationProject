@@ -19,54 +19,55 @@ function readData(){
   
     // ******PIE************************************
     // grabing the genre count from the csv file 
-    d3.csv('../RawData/genre.csv').then(data => {
+    // d3.csv('../RawData/genre.csv').then(data => {
      
-      // Grabing the data for selected year
-      let array = data.filter(row => row.year === id);
-      counts = [];
-        array.forEach(index => {
+    //   // Grabing the data for selected year
+    //   let array = data.filter(row => row.year === id);
+    //   counts = [];
+    //     array.forEach(index => {
           
-         // Define genre variable and grab the count of each genre
-         index.count = parseInt(index.count)
-         counts.push(index.count);
+    //      // Define genre variable and grab the count of each genre
+    //      index.count = parseInt(index.count)
+    //      counts.push(index.count);
   
-        //  counts = parseInt(counts);
+    //     //  counts = parseInt(counts);
   
-            // if (genre == "Fiction") {
+    //         // if (genre == "Fiction") {
             
-            //   let countfinction = parseInt(index.count);
-            //   console.log(countfinction);
-            // }
-            // else {countNonfiction = index.count;}
+    //         //   let countfinction = parseInt(index.count);
+    //         //   console.log(countfinction);
+    //         // }
+    //         // else {countNonfiction = index.count;}
   
-        })
+    //     })
         
-        // let values = counts;
-        console.log(counts);
+    //     // let values = counts;
+    //     console.log(counts);
   
-        // let labels = [ "Fiction", "Non Fiction" ];
+    //     // let labels = [ "Fiction", "Non Fiction" ];
   
-        let pieTrace = [{
-          type: "pie",
-          values: counts,
-          labels: [ "Fiction", "Non-Fiction" ],
-          textinfo: "label+percent",
-          // hoverinfo: 'label+percent'
+    //     let pieTrace = [{
+    //       type: "pie",
+    //       values: counts,
+    //       labels: [ "Fiction", "Non-Fiction" ],
+    //       textinfo: "label+percent",
+    //       // hoverinfo: 'label+percent'
           
-        }]
+    //     }]
   
-        let pielayout = {
-          title: `Fiction vs Non-fiction in ${id}`
-        };
+    //     let pielayout = {
+    //       title: `Fiction vs Non-fiction in ${id}`
+    //     };
         
-        Plotly.newPlot("pie", pieTrace, pielayout);
-      }); 
+    //     Plotly.newPlot("pie", pieTrace, pielayout);
+    //   }); 
 
 
 
 
       // *************BAR**************************
-      d3.csv('../RawData/filtered-bar-plot-data.csv').then(data => {
+      d3.csv('/analysisBYyears').then(data => {
+          console.log(data)
         let ratingArray = []
         let nameArray = []
             // console.log(index.Rating)

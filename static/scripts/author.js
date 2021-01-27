@@ -3,7 +3,7 @@
 
     // read in the booksellers.csv file
     // replace with Pankaj's sql qry authors
-    let filepath = "http://127.0.0.1:5000/authors"
+    let filepath = "/authors"
  
     d3.json(filepath).then(data => {
         // console.log(data)
@@ -40,7 +40,7 @@ function buildBar(name){
 
 
     //read file. then grab relevant data and create visualizations accordingly 
-    d3.json('http://127.0.0.1:5000/author_books').then(item=>{
+    d3.json('/author_books').then(item=>{
         // console.log(item)
  
         let data = item.filter(row => row.Author === id);
@@ -89,7 +89,7 @@ function buildBar(name){
     })
 
 //rating gauge chart 
-let filepath = "http://127.0.0.1:5000/avg_rating_by_author"
+let filepath = "/avg_rating_by_author"
 d3.json(filepath).then(index => {
     // console.log(index)
 
