@@ -65,9 +65,10 @@ function readData(){
             nameArray.push(index.Name)
         });
         // console.log(nameArray)
-        array.forEach(index => {
-            priceArray.push(index.Price)
+        array.forEach((index) => {
+          priceArray.push("$" + index.Price);
         });
+
         console.log(priceArray)
         let bookRating = ratingArray
         let bookName = nameArray
@@ -79,7 +80,7 @@ function readData(){
             type: "bar",
             orientation: 'h',
             marker: {
-                color: 'blue'
+                color: 'LightSeaGreen'
             },
             text: bookPrice.slice(0, 10).reverse()
         };
@@ -87,7 +88,7 @@ function readData(){
         let barData = [barTrace];
         // create the plot layout
         let barLayout = {
-            title: 'Top 10 Amazon Bestsellers',
+            title: `Top 10 Amazon Bestsellers in ${id}`,
             font: {
                 family: "Raleway",
             },

@@ -1,8 +1,8 @@
 var svgWidth = 960;
-var svgHeight = 500;
+var svgHeight = 600;
 
 var margin = {
-  top: 20,
+  top: 60,
   right: 40,
   bottom: 80,
   left: 100,
@@ -16,12 +16,15 @@ var svg = d3
   .select(".chart")
   .append("svg")
   .attr("width", svgWidth)
-  .attr("height", svgHeight);
+  .attr("height", svgHeight)
+
+
 
 // Append an SVG group
 var chartGroup = svg
   .append("g")
-  .attr("transform", `translate(${margin.left}, ${margin.top})`);
+  .attr("transform", `translate(${margin.left}, ${margin.top})`)
+
 
 //initial parameters
 // let chosenYAxis = "AvgRating"
@@ -133,6 +136,14 @@ d3.json(url).then((data) => {
   let bottomAxis = d3.axisBottom(xScale);
   let leftAxis = d3.axisLeft(yLinearScale);
 
+  //title 
+  svg.append('text')
+  .attr("x", width/1.5)
+  .attr("y", 25 )
+  .style("text-anchor","middle")
+  .style("font-size", "30px")
+  .text("Interactive Trendline Analysis from 2009-2019")
+
   //add axes to chart
   chartGroup
     .append("g")
@@ -171,7 +182,7 @@ d3.json(url).then((data) => {
     .append("text")
     .attr("transform", "rotate(-90)")
     .attr("y", 0 - margin.left + 40)
-    .attr("x", 0 - height / 1.5)
+    .attr("x", 0 - height / 2)
     .attr("dy", "1em")
     .attr("class", "axisText")
     .attr("value", "AvgPrice")
@@ -182,7 +193,7 @@ d3.json(url).then((data) => {
     .append("text")
     .attr("transform", "rotate(-90)")
     .attr("y", 0 - margin.left + 20)
-    .attr("x", 0 - height / 1.5)
+    .attr("x", 0 - height / 2)
     .attr("dy", "1em")
     .attr("class", "axisText")
     .attr("value", "AvgRating")
@@ -191,7 +202,7 @@ d3.json(url).then((data) => {
 
   chartGroup
     .append("text")
-    .attr("transform", `translate(${width / 2}, ${height + margin.top + 30})`)
+    .attr("transform", `translate(${width / 2}, ${height + margin.top -10})`)
     .attr("class", "axisText")
     .text("Years");
 

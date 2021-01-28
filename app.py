@@ -217,19 +217,14 @@ def year_bar():
                        ORDER BY year
                    ''' , db)
     year_bar_list = [ ]
-    for i in range(len(year_bar_df.to_dict('split')['data'])):
-        name = year_bar_df.to_dict('split')['data'][i][0]
-        year = year_bar_df.to_dict('split')['data'][i][1]
-        price = year_bar_df.to_dict('split')['data'][i][2]
-        rating = year_bar_df.to_dict('split')['data'][i][3]
-
-        data = { 
-                "Year": year,
-                "Name": name,
-                "Rating": rating,
-                "Price": price,
-                }
-        year_bar_list.append(data)
+    for index, row in year_bar_df.iterrows():
+        data = {
+            "Year": row["year"],
+            "Name": row["name"],
+            "Rating": row["rating"],
+            "Price": row["price"],
+            }
+        year_bar_list.append(data);
     return jsonify(year_bar_list)
 
 
