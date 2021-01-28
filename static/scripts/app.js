@@ -19,7 +19,6 @@ var svg = d3
   .attr("height", svgHeight)
 
 
-
 // Append an SVG group
 var chartGroup = svg
   .append("g")
@@ -138,11 +137,12 @@ d3.json(url).then((data) => {
 
   //title 
   svg.append('text')
-  .attr("x", width/1.5)
-  .attr("y", 25 )
-  .style("text-anchor","middle")
-  .style("font-size", "30px")
-  .text("Interactive Trendline Analysis from 2009-2019")
+      .attr("x", width/1.5)
+      .attr("y", 25 )
+      .style("text-anchor","middle")
+      .style("font-size", "30px")
+      .text("Average Book Prices and Ratings")
+
 
   //add axes to chart
   chartGroup
@@ -186,6 +186,7 @@ d3.json(url).then((data) => {
     .attr("dy", "1em")
     .attr("class", "axisText")
     .attr("value", "AvgPrice")
+    // .attr("stroke","green")
     .classed("active", true)
     .text("Book Prices ($)");
 
@@ -197,6 +198,7 @@ d3.json(url).then((data) => {
     .attr("dy", "1em")
     .attr("class", "axisText")
     .attr("value", "AvgRating")
+    // .attr("stroke","blue")
     .classed("inactive", true)
     .text("Rating");
 

@@ -1,8 +1,14 @@
 
-// set the dimensions and margins of the graph
+
+// This function takes the output of 'layout' above and draw the words
+// Wordcloud features that are THE SAME from one word to the other can be here
+
+d3.json("/author_count").then(data=> {
+console.log(data)   
+  // set the dimensions and margins of the graph
 var margin = {top: 10, right: 10, bottom: 10, left: 10},
-    width = 450 - margin.left - margin.right,
-    height = 450 - margin.top - margin.bottom;
+width = 950 - margin.left - margin.right,
+height = 950 - margin.top - margin.bottom;
 
 
 // append the svg object to the body of the page
@@ -11,16 +17,27 @@ var svg = d3.select("#my_dataviz").append("svg")
 .attr("height", height + margin.top + margin.bottom)
 .append("g")
 .attr("transform",
-      "translate(" + margin.left + "," + margin.top + ")");
+  "translate(" + margin.left + "," + margin.top + ")");
 
-// This function takes the output of 'layout' above and draw the words
-// Wordcloud features that are THE SAME from one word to the other can be here
+// title
+svg.append('text')
+    .attr("x", width/2)
+    .attr("y", 20 )
+    .style("text-anchor","middle")
+    .style("font-size", "30px")
+    .text("Number of Bestsellers Per Author")
+ 
+ 
+  let list = []
+  let size= []
+    data.forEach(index => {
 
+      list.push(index)
+      size.push(index.Count)
+    });
+    console.log(list)
+    console.log(size.toString(2))
 
-url = 'http://127.0.0.1:5000/author_count'
-d3.json(url).then(data=> {
-    const dataset = data.data
-    // console.log(dataset)
 
 // List of words
 // var myWords = [{word: "Running", size: "10"}, {word: "Surfing", size: "20"}, {word: "Climbing", size: "50"}, {word: "Kiting", size: "30"}, {word: "Sailing", size: "20"}, {word: "Snowboarding", size: "60"} ]
@@ -28,28 +45,30 @@ d3.json(url).then(data=> {
 // Constructs a new cloud layout instance. It run an algorithm to find the position of words that suits your requirements
 // Wordcloud features that are different from one word to the other must be here
     var layout = d3.layout.cloud()
-    .size([width, height])
-    .words(dataset.map(d=> { return {text: d.Author, size:d.Count}; }))
-    .padding(5)        //space between words
-    .rotate(function() { return ~~(Math.random() * 2) * 90; })
-    .fontSize(function(d) { return d.Count; })      // font size of words
-    .on("end", draw);
+      .size([width, height])
+      .words(list.map(d=> { return {text: d.Author, size:d.Count}; }))
+      .padding(5)        //space between words
+      .rotate(function() { return ~~(Math.random() * 2) * 90; })
+      // .fontSize(10)
+      .fontSize(function(d) { return d.size*4; })
+      // .fontSize(size.map(d=>{ return {size:d.Count}; }))      // font size of words
+      .on("end", draw);
     layout.start();
 
-function draw(words) {
-  svg
-    .append("g")
-      .attr("transform", "translate(" + layout.size()[0] / 2 + "," + layout.size()[1] / 2 + ")")
-      .selectAll("text")
-        .data(words)
-      .enter().append("text")
-        .style("font-size", function(d) { return d.Count; })
-        .style("fill", "#69b3a2")
-        .attr("text-anchor", "middle")
-        .style("font-family", "Impact")
-        .attr("transform", function(d) {
-          return "translate(" + [d.x, d.y] + ")rotate(" + d.rotate + ")";
-        })
-        .text(function(d) { return d.text; });
-}
+    function draw(words) {
+      svg
+        .append("g")
+          .attr("transform", "translate(" + layout.size()[0] / 2 + "," + layout.size()[1] / 2 + ")")
+          .selectAll("text")
+            .data(words)
+          .enter().append("text")
+            .style("font-size", function(d) { return d.size; })
+            .style("fill", "#69b3a2")
+            .attr("text-anchor", "middle")
+            .style("font-family", "Impact")
+            .attr("transform", function(d) {
+              return "translate(" + [d.x, d.y] + ")rotate(" + d.rotate + ")";
+            })
+            .text(function(d) { return d.text; });
+    }
 })

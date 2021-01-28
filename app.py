@@ -246,7 +246,7 @@ def author_count():
             'Count': cnt
         }
         author_count_list.append(data)
-    return jsonify(data=author_count_list)      
+    return jsonify(author_count_list)      
 
 if __name__ == "__main__":
     app.run(debug=True)

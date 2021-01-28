@@ -13,6 +13,7 @@
 <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/2.0.2/anime.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/5.5.0/d3.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/holtzy/D3-graph-gallery@master/LIB/d3.layout.cloud.js"></script>
 <!-- Load d3.js -->
 <script src="https://d3js.org/d3.v6.js"></script>
 
@@ -25,7 +26,10 @@ html,body,h1,h2,h3,h4,h5 {font-family: "Raleway", sans-serif}
 <div class="w3-bar w3-top w3-brown w3-large" style="z-index:4">
 
   <button class="w3-bar-item w3-button w3-hide-large w3-hover-none w3-hover-text-light-grey" onclick="w3_open();"><i class="fa fa-bars"></i>  Menu</button>
-  <span class="w3-bar-item w3-right" style="height:80px">Welcome</span>
+  <span class="w3-bar-item w3-right" style="height:20px">Welcome</span>
+
+
+  <span class="w3-bar-item w3-left" style="height:80px"><strong><h1>Amazon Bestsellers Library (2009-2019)</h1></strong></span>
 </div>
 
 <!-- Sidebar/menu -->
@@ -61,9 +65,10 @@ html,body,h1,h2,h3,h4,h5 {font-family: "Raleway", sans-serif}
   <header class="w3-container" style="padding-top:22px;padding-left:100px">
     <!-- <h1 class="ml2"><b><i class="fa fa-dashboard"></i> Amazon Bestsellers Library </b></h1> -->
      <!-- <h1><b><i class="fa fa-dashboard"></i> Amazon Bestsellers Library </b></h1> -->
-     <h1><b><i class></i> Amazon Bestsellers Library </b></h1>
+     <!-- <h1><b><i class></i> Amazon Bestsellers Library </b></h1> -->
 
   </header>
+
 
   <script>
     // Get the Sidebar
@@ -90,6 +95,8 @@ html,body,h1,h2,h3,h4,h5 {font-family: "Raleway", sans-serif}
     }
     </script>
 <script src="../static/scripts/anime.js"></script>
+
+
 
 
 {% block content %}{% endblock %}
