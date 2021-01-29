@@ -72,74 +72,14 @@ def author_books():
                    ''' SELECT * FROM books \
                        ORDER BY author asc
                    ''' , db)
-    author_books_list = []
-    # // below for loop has performnace issues
-    # for i in range(len(authors_books_df.to_dict('split')['data'])):
-    #     name = authors_books_df.to_dict('split')['data'][i][0]
-    #     author = authors_books_df.to_dict('split')['data'][i][1]
-    #     rating = authors_books_df.to_dict('split')['data'][i][2]
-    #     review = authors_books_df.to_dict('split')['data'][i][3]
-    #     price = authors_books_df.to_dict('split')['data'][i][4]
-    #     year = authors_books_df.to_dict('split')['data'][i][5]
-    #     genre = authors_books_df.to_dict('split')['data'][i][6]
-   
+    author_books_list = []   
     for index, row in authors_books_df.iterrows(): 
         data = { 'Author':row["author"], 'Title': row["name"],
                 'Reviews':row["reviews"], 'Rating':row["rating"], 
                 'Price':row["price"],'Year':row['year'],
                     'Genre':row["genre"]}
         author_books_list.append(data);
-
-        # data = { 
-        #         "Author": author,
-        #         "Title": name,
-        #         "Reviews": review,
-        #         "Rating": rating,
-        #         "Price": price,
-        #         "Year": year,
-        #         "Genre": genre
-        #         }
-        # author_books_list.append(data)
     return jsonify(author_books_list)
-
-# @app.route("/avgprice_yearly")
-# def avgprice_yearly():
-#     avgprice_df = pd.read_sql_query(
-#                    '''  SELECT year,ROUND(avg(price),2) FROM books \
-#                         GROUP BY year
-#                         ORDER BY year;
-#                    ''' , db)
-#     i = 0
-#     avgprice_list = []
-#     for i in range(len(avgprice_df.to_dict('split')['data'])):
-#         year = avgprice_df.to_dict('split')['data'][i][0]
-#         avgprice = avgprice_df.to_dict('split')['data'][i][1]
-
-#         data = {
-#             'Year' : year,
-#             'Average Price' : avgprice
-#         }
-#         avgprice_list.append(data)
-#     return jsonify(data=avgprice_list)
-
-# @app.route("/avg_rating")
-# def avg_rating():
-#     avg_rating_df = pd.read_sql_query(
-#                    ''' SELECT year,ROUND(avg(rating),2) FROM books \
-#                        GROUP BY year \
-#                        ORDER BY year
-#                    ''' , db)
-#     i = 0
-#     avg_rating_list = []
-#     for i in range(len(avg_rating_df.to_dict('split')['data'])):
-#         year = avg_rating_df.to_dict('split')['data'][i][0]
-#         rating =  avg_rating_df.to_dict('split')['data'][i][1]
-#         data = {
-#             'Year': year,
-#             'Average Rating': rating
-#         }
-#         avg_rating_list.append(data)
-#     return jsonify(data=avg_rating_list)
 
 @app.route("/avg_rating_by_author")
 def avg_rating_by_author():

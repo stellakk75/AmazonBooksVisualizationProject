@@ -1,8 +1,4 @@
 
-
-// This function takes the output of 'layout' above and draw the words
-// Wordcloud features that are THE SAME from one word to the other can be here
-
 d3.json("/author_count").then(data=> {
 console.log(data)   
   // set the dimensions and margins of the graph
@@ -37,10 +33,6 @@ svg.append('text')
     });
     console.log(list)
     console.log(size.toString(2))
-
-
-// List of words
-// var myWords = [{word: "Running", size: "10"}, {word: "Surfing", size: "20"}, {word: "Climbing", size: "50"}, {word: "Kiting", size: "30"}, {word: "Sailing", size: "20"}, {word: "Snowboarding", size: "60"} ]
 
 // Constructs a new cloud layout instance. It run an algorithm to find the position of words that suits your requirements
 // Wordcloud features that are different from one word to the other must be here

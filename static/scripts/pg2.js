@@ -48,6 +48,8 @@ function readData(){
         
         Plotly.newPlot("pie", pieTrace, pielayout);
       }); 
+
+      
 // BAR CHART***********************************************
       d3.json('/year_bar').then(data => {
  

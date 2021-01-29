@@ -2,7 +2,6 @@
     let dropdown = d3.select('#selDataset');
 
     // read in the booksellers.csv file
-    // replace with Pankaj's sql qry authors
     let filepath = "/authors"
  
     d3.json(filepath).then(data => {
@@ -13,9 +12,6 @@
 
         //select dropdown menu 
         d3.select('#selDataset').on('change', buildBar)
-
-        // assigns value of change id to variable 
-
     })
     
 function buildBar(name){
@@ -62,7 +58,6 @@ function buildBar(name){
 		.enter()
 		.append("th")
 			.text(function(d){ return d;})
-        // header.exit().remove()
 
         var rows = tbody.selectAll("tr")
         .data(data)
@@ -76,7 +71,6 @@ function buildBar(name){
             d3.select(this)
                 .style("background-color","transparent");
         });
-        // rows.exit().remove()
 
     	var cells = rows.selectAll("td")
 		.data(function(row){
@@ -87,9 +81,6 @@ function buildBar(name){
 		.enter()
 		.append("td")
 		.html(function(d){ return d.value;});		
-        
-        // cells.exit().remove()
-        // d3.select('#table-location').remove() 
     })
 
 //rating gauge chart 
@@ -121,19 +112,6 @@ d3.json(filepath).then(index => {
         mode: "gauge+number",
       },
     ];
-
-    // let layout = {
-    //   autosize: true,
-    //   width: 500,
-    //   height: 500,
-    //   margin:{
-    //     l:50,
-    //     r:50,
-    //     b:100,
-    //     t:100,
-    //     pad:4
-    //   }
-    // }
 
     Plotly.newPlot("gauge", bonus);
   });
