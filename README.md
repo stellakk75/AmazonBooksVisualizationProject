@@ -11,7 +11,7 @@
   * JavaScript
   * Postgres database 
   * D3.js and Plotly visualizations 
-    * interactive d3 scatter plots with trend lines, word cloud, bar/pie/gauge plots, d3 tables)
+    * Interactive d3 scatter plots with trend lines, word cloud, bar/pie/gauge plots, d3 tables)
   * Dashboard that updates multiple charts from same data
   * User driven interactions such as menus, dropdowns, and textbox
   * JS libraries include JQuery and anime.js 
