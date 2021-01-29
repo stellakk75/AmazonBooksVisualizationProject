@@ -7,15 +7,15 @@
 
 ### Project includes
   * Python Flask- powered API
-  * HTML/CSS
+  * HTML/CSS including creation of separate layout file
   * JavaScript
   * Postgres database 
   * D3.js and Plotly visualizations 
     * interactive d3 scatter plots with trend lines, word cloud, bar/pie/gauge plots, d3 tables)
   * Dashboard that updates multiple charts from same data
   * User driven interactions such as menus, dropdowns, and textbox
-  * JS libraries: JQuery and anime.js 
-  * Google API Search Tool
+  * JS libraries include JQuery and anime.js 
+  * Google API Search Tool 
   
 ### Group members (alphabetical by last name)
   * Sydney Harkins
