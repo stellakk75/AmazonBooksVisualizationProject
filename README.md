@@ -5,7 +5,7 @@
 ### Data Source: Kaggle (https://www.kaggle.com/sootersaalu/amazon-top-50-bestselling-books-2009-2019)
 ### Project Proposal Link: https://docs.google.com/document/d/1s_l_svK9Ckgq0auGpWcUYGXjPvxNME6qmvo47VLYAxs/edit
 
-### Project includes
+### Project includes:
   * Python Flask- powered API
   * HTML/CSS including creation of separate layout file
   * JavaScript
@@ -17,7 +17,7 @@
   * JS libraries include JQuery and anime.js 
   * Google API Search Tool 
   
-### Group members (alphabetical by last name)
+### Group members:
   * Sydney Harkins
   * Stella Kim
   * Sarah Lee
