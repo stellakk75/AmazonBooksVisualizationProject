@@ -22,8 +22,5 @@
   * Stella Kim
   * Sarah Lee
   * Pankaj Parashar
-<<<<<<< HEAD
   * Rupali Surve
-=======
-  * Rupali Surve
->>>>>>> 9a248f1bd89e3cde7a39c4ed30dc294ed8fc9a03
+
