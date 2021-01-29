@@ -3,6 +3,7 @@
 ### The purpose of this project is to tell a story using interactive data visualizations and provide search capabilities to assist in decision making  
 ### Topic: Amazon's Top 50 Bestselling Books from 2009-2019
 ### Source: Kaggle (https://www.kaggle.com/sootersaalu/amazon-top-50-bestselling-books-2009-2019)
+### Project Proposal: https://docs.google.com/document/d/1s_l_svK9Ckgq0auGpWcUYGXjPvxNME6qmvo47VLYAxs/edit
 
 ### Project includes
   * Python Flask- powered API
