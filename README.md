@@ -2,9 +2,9 @@
 
 ### The purpose of this project is to tell a story to users with interactive data visualizations and provide search capabilities to help make informed decisions 
 ### Topic: Amazon's Top 50 Bestselling Books from 2009-2019
-### Source: Kaggle (https://www.kaggle.com/sootersaalu/amazon-top-50-bestselling-books-2009-2019)**
+### Source: Kaggle (https://www.kaggle.com/sootersaalu/amazon-top-50-bestselling-books-2009-2019)
 
-* Includes
+#### Project includes
   * Python Flask- powered API
   * HTML/CSS
   * JavaScript
@@ -17,8 +17,8 @@
   * Google API Search Tool
   
 ### Group members (alphabetical by last name)
-  #### -Sydney Harkins
-  #### -Stella Kim
-  #### -Sarah Lee
-  #### -Pankaj Parashar
-  #### -Rupali Surve
+  * Sydney Harkins
+  * Stella Kim
+  * Sarah Lee
+  * Pankaj Parashar
+  * Rupali Surve
