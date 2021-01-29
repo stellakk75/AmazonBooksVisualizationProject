@@ -1,10 +1,10 @@
 # Project 2 - Visualize Me!
 
-### The purpose of this project is to tell a story to users with interactive data visualizations and provide search capabilities to help make informed decisions 
+### The purpose of this project is to tell a story using interactive data visualizations and provide search capabilities to assist in decision making  
 ### Topic: Amazon's Top 50 Bestselling Books from 2009-2019
 ### Source: Kaggle (https://www.kaggle.com/sootersaalu/amazon-top-50-bestselling-books-2009-2019)
 
-#### Project includes
+### Project includes
   * Python Flask- powered API
   * HTML/CSS
   * JavaScript
