@@ -8,7 +8,7 @@
 
 ### Project includes:
   * Python Flask- powered API
-  * HTML/CSS including creation of separate layout file
+  * HTML/CSS including template extending
   * JavaScript
   * Postgres database 
   * D3.js and Plotly visualizations 
