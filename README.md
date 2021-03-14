@@ -6,7 +6,7 @@
 
 ### DATA SOURCE: Kaggle (https://www.kaggle.com/sootersaalu/amazon-top-50-bestselling-books-2009-2019)
 
-### Project includes:
+### INCLUDES:
   * Python Flask- powered API
   * HTML/CSS including template extending
   * JavaScript
