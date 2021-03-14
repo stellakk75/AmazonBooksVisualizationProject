@@ -1,9 +1,10 @@
-# Project 2 - Visualize Me!
+# Amazon's Top 50 Bestselling Books from 2009-2019 Visualization Dashboard
 
-### The purpose of this project is to tell a story using interactive data visualizations and provide search capabilities to assist in decision making  
-### Topic: Amazon's Top 50 Bestselling Books from 2009-2019
-### Data Source: Kaggle (https://www.kaggle.com/sootersaalu/amazon-top-50-bestselling-books-2009-2019)
-### Project Proposal Link: https://docs.google.com/document/d/1s_l_svK9Ckgq0auGpWcUYGXjPvxNME6qmvo47VLYAxs/edit
+### PROJECT INTENT
+* Tell a story using interactive data visualizations 
+* Provide search capabilities to assist in decision making  
+
+### DATA SOURCE: Kaggle (https://www.kaggle.com/sootersaalu/amazon-top-50-bestselling-books-2009-2019)
 
 ### Project includes:
   * Python Flask- powered API
@@ -16,11 +17,9 @@
   * User driven interactions such as menus, dropdowns, and textbox
   * JS libraries include JQuery and anime.js 
   * Google API Search Tool 
-  
-### Group members:
-  * Sydney Harkins
-  * Stella Kim
-  * Sarah Lee
-  * Pankaj Parashar
-  * Rupali Surve
+---
+### TEAM MEMBERS
+* Sydney Harkins, Stella Kim, Sarah Lee, Pankaj Parashar, Rupali Surve
 
+---
+**Contact:** stellakk75@gmail.com
